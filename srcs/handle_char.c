@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_float.c                                     :+:      :+:    :+:   */
+/*   handle_char.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/04 12:52:29 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/04 12:59:20 by nobrien          ###   ########.fr       */
+/*   Created: 2018/03/04 12:14:54 by nobrien           #+#    #+#             */
+/*   Updated: 2018/03/19 11:18:57 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
-void	handle_double(double num)
+void	handle_char(int c, t_arg *args)
 {
+	char *str;
 
+	str = ft_strnew(1);
+	str[0] = c;
+	handle_string(str, args);
 }

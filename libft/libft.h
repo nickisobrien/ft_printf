@@ -6,7 +6,7 @@
 /*   By: nobrien <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:52:02 by nobrien           #+#    #+#             */
-/*   Updated: 2018/02/23 16:29:40 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/19 18:38:06 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ int					ft_islower(char c);
 int					ft_isupper(char c);
 size_t				ft_getfirst(char const *s);
 size_t				ft_getlast(char const *s);
+void				ft_strupper(char *str);
 
 #endif
