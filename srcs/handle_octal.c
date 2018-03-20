@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 20:26:36 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/19 10:27:01 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/20 16:07:13 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	handle_octal(int num, t_arg *args)
         num /= 8;
         i *= 10;
     }
-	handle_int(octalNumber, args);
+	handle_int(octalNumber, args, 2);
 }

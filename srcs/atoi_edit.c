@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 22:08:22 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/19 18:41:18 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/20 14:48:27 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,3 +91,16 @@ char		*ft_itoa_edit(long long n)
 	return (str);
 }
 
+int		int_strchr(const char *str, int c)
+{
+	int i;
+
+	i = 0;
+	while (str[i] != c)
+	{
+		if (str[i] == '\0')
+			return (-1);
+		i++;
+	}
+	return (i);
+}

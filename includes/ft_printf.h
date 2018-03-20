@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 12:35:39 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/20 13:20:29 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/20 15:47:29 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 typedef struct 	s_arg
 {
+	char	*types;
 	int		has_space;
 	int		has_zero;
 	int		has_minus;
@@ -39,16 +40,18 @@ typedef struct 	s_arg
 }				t_arg;
 
 void	handle_char(int c, t_arg *args);
-void	handle_string(char *str, t_arg *args);
-void	handle_int(long long num, t_arg *args);
+void	handle_string(char *str, t_arg *args, int ct);
+void	handle_int(long long num, t_arg *args, int ct);
 void	handle_double(double num);
 void	handle_octal(int octal, t_arg *args);
-void 	handle_hex(long long n, t_arg *args, int var);
-void	handle_unsigned_int(long long num, t_arg *args, int func);
+void 	handle_hex(long long n, t_arg *args, int ct);
+void	handle_unsigned_int(long long num, t_arg *args, int ct);
 
 int		atoi_edit(const char *str);
 int		strchr_edit(const char *str, int c);
 char	*ft_itoa_edit(long long n);
 void	replace_zeros(char *str);
+int		int_strchr(const char *str, int c);
+void	fix_signs(char *str);
 
 #endif

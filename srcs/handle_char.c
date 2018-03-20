@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 12:14:54 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/19 11:18:57 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/20 14:59:15 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ void	handle_char(int c, t_arg *args)
 
 	str = ft_strnew(1);
 	str[0] = c;
-	handle_string(str, args);
+	handle_string(str, args, 0);
 }
