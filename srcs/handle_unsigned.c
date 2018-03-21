@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 22:07:46 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/20 18:58:00 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/21 12:30:35 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 void	handle_unsigned_int(long long num, t_arg *args, int ct)
 {
-	if (args->has_space)
-	{
-		//warning, ' ' is undefined with unsigned
+	if (args->has_space) //warning, ' ' is undefined with unsigned
 		args->has_space = 0;
-	}
 	if (num < 0)
 		num = 4294967296 + num;
 	if (ct == 1)

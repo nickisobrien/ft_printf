@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 12:12:13 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/20 16:07:59 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/21 12:27:38 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ void	handle_int(long long num, t_arg *args, int ct)
 	char *precision;
 	char *spaces;
 
-	numstr = ft_itoa_edit(num);
+	if (num || args->precision != -1)
+		numstr = ft_itoa_edit(num);
+	else
+		numstr = ft_strnew(0);
 	if (ft_countdigits(numstr) < args->precision)
 	{
 		precision = ft_strnew(args->precision - ft_countdigits(numstr));
