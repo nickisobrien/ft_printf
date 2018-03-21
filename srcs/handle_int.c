@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 12:12:13 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/21 12:27:38 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/21 12:52:46 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		ft_countdigits(char *str)
 	return (i);
 }
 
-void	handle_int(long long num, t_arg *args, int ct)
+void	handle_int(intmax_t num, t_arg *args, int ct)
 {
 	char *numstr;
 	char *precision;

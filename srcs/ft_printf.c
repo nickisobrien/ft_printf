@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 16:21:23 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/21 12:51:11 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/21 14:30:51 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,32 @@
 
 int 	ft_printf(char *str, ...);
 
-int 	main(void)
-{
-	// ft_printf("@m moulitest:%#.x %#.0x<\n", 0, 0);
-	// ft_printf("@m moulitest:%.x %.0x<\n", 0, 0);
-	// ft_printf("@m moulitest:%5.x %5.0x<\n", 0, 0);
-	// ft_printf("@t moulitest:%#.x %#.0x<\n", 0, 0);
-	// ft_printf("@t moulitest:%.x %.0x<\n", 0, 0);
-	// ft_printf("@t moulitest:%5.x %5.0x<\n", 0, 0);
+// int 	main(void)
+// {
+// 	// ft_printf("@m moulitest:%#.x %#.0x<\n", 0, 0);
+// 	// ft_printf("@m moulitest:%.x %.0x<\n", 0, 0);
+// 	// ft_printf("@m moulitest:%5.x %5.0x<\n", 0, 0);
+// 	// ft_printf("@t moulitest:%#.x %#.0x<\n", 0, 0);
+// 	// ft_printf("@t moulitest:%.x %.0x<\n", 0, 0);
+// 	// ft_printf("@t moulitest:%5.x %5.0x<\n", 0, 0);
 
-	// ft_printf("  mine:%x\n", 4294967296);
-	// printf("theirs:%x\n", 4294967296);
+// 	// ft_printf("m:%zd|\n", 4294967295);
+// 	// printf("t:%zd|\n", 4294967295);
 
-	ft_printf("m:%jx|\n", 4294967296);
-	printf("t:%jx|\n", 4294967296);
+// 	// ft_putnbr(ft_printf("m:@moulitest: >%c<\n", 0));
+// 	// ft_putnbr(printf("t:@moulitest: >%c<\n", 0));
+// 	// ft_putnbr(printf("  mine:@moulitest: %o|\n", 0));
+// 	// ft_putnbr(ft_printf("theirs:@moulitest: %o|\n", 0));
+	
+// 	// printf("t:%hhd|\n", 128);
+// 	// ft_printf("m:%hhd|\n", 128);
 
-	// ft_putnbr(ft_printf("m:@moulitest: >%c<\n", 0));
-	// ft_putnbr(printf("t:@moulitest: >%c<\n", 0));
-	// ft_putnbr(printf("  mine:@moulitest: %o|\n", 0));
-	// ft_putnbr(ft_printf("theirs:@moulitest: %o|\n", 0));
+// 	ft_printf("m:%jx|\n", -4294967296);
+// 	printf("t:%jx|\n", -4294967296);
 
-	// printf("theirs:%lld\n", -9223372036854775808);
-	// ft_printf("  mine:%lld\n", -9223372036854775808);
-}
+// 	// printf("theirs:%lld\n", -9223372036854775808);
+// 	// ft_printf("  mine:%lld\n", -9223372036854775808);
+// }
 
 void	init_arg(t_arg *arg)
 {
@@ -84,7 +87,7 @@ int		parse_args(char *str, t_arg *args)
 	while (ft_isdigit(str[i]))
 		i++;
 	if (str[i] == '.')
-		if (!(args->precision = abs(atoi_edit(&(str[i + 1])))))
+		if (!(args->precision = labs(atoi_edit(&(str[i + 1])))))
 			args->precision = -1;
 	while (str[i] == '.' || ft_isdigit(str[i]))
 		i++;
@@ -117,7 +120,7 @@ int		parse_flags(char *str, t_arg *args)
 	return (i);
 }
 
-void	num_handler(long long num, t_arg *args)
+void	num_handler(intmax_t num, t_arg *args)
 {
 	if (args->call == 'd' || args->call == 'i')
 		handle_int(num, args, 0);
@@ -161,14 +164,13 @@ int 	ft_printf(char *str, ...)
 	{
 		if (str[i] != '%')
 		{
-			ft_putchar(str[i]);
+			ft_putchar(str[i++]);
 			args.printed_chars++;
-			i++;
 			continue;
 		}
 		init_arg(&args);
 		i++;
-		args.min_width = abs(atoi_edit(&str[i])); //can use abs?
+		args.min_width = labs(atoi_edit(&str[i])); //can use abs?
 		i += parse_args(&(str[i]), &args);
 		i += parse_flags(&(str[i]), &args);
 		
@@ -177,10 +179,16 @@ int 	ft_printf(char *str, ...)
 			args.call = str[i];
 			if (index <= 8)
 			{
-				if (args.ll)
-					num_handler(va_arg(ap, long long), &args);
+				if (args.j || args.ll)
+					num_handler(va_arg(ap, intmax_t), &args);
 				else if (args.l)
 					num_handler(va_arg(ap, long), &args);
+				else if (args.z)
+					num_handler(va_arg(ap, size_t), &args);
+				else if (args.h)
+					num_handler((short)va_arg(ap, int), &args);
+				else if (args.hh)
+					num_handler((char)va_arg(ap, int), &args);
 				else
 					num_handler(va_arg(ap, int), &args);
 			}

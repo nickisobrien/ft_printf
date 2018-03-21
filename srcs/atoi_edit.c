@@ -6,16 +6,16 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 22:08:22 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/20 21:38:29 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/21 12:54:14 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		atoi_edit(const char *str)
+intmax_t	atoi_edit(const char *str)
 {
 	int i;
-	int atoi;
+	intmax_t atoi;
 	int neg;
 
 	i = 0;
@@ -55,7 +55,7 @@ int		strchr_edit(const char *str, int c)
 	return (1);
 }
 
-static void	neg(long long *n, int *negative)
+static void	neg(intmax_t *n, int *negative)
 {
 	if (*n < 0)
 	{
@@ -64,11 +64,11 @@ static void	neg(long long *n, int *negative)
 	}
 }
 
-char		*ft_itoa_edit(long long n)
+char		*ft_itoa_edit(intmax_t n)
 {
 	int			i;
 	char		*str;
-	long long	tmp;
+	intmax_t	tmp;
 	int			negative;
 
 	i = 2;
