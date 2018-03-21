@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 12:35:39 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/20 15:47:29 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/20 19:36:08 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 typedef struct 	s_arg
 {
 	char	*types;
+	char	call;
 	int		has_space;
 	int		has_zero;
 	int		has_minus;

@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 16:21:23 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/20 16:10:19 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/21 12:08:17 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,26 @@
 
 int 	ft_printf(char *str, ...);
 
-// int 	main(void)
-// {
-// 	// ft_printf("@m moulitest:%#.x %#.0x<\n", 0, 0);
-// 	// ft_printf("@m moulitest:%.x %.0x<\n", 0, 0);
-// 	// ft_printf("@m moulitest:%5.x %5.0x<\n", 0, 0);
-// 	// ft_printf("@t moulitest:%#.x %#.0x<\n", 0, 0);
-// 	// ft_printf("@t moulitest:%.x %.0x<\n", 0, 0);
-// 	// ft_printf("@t moulitest:%5.x %5.0x<\n", 0, 0);
+int 	main(void)
+{
+	// ft_printf("@m moulitest:%#.x %#.0x<\n", 0, 0);
+	// ft_printf("@m moulitest:%.x %.0x<\n", 0, 0);
+	// ft_printf("@m moulitest:%5.x %5.0x<\n", 0, 0);
+	// ft_printf("@t moulitest:%#.x %#.0x<\n", 0, 0);
+	// ft_printf("@t moulitest:%.x %.0x<\n", 0, 0);
+	// ft_printf("@t moulitest:%5.x %5.0x<\n", 0, 0);
 
-// 	// ft_printf("  mine:%x\n", 4294967296);
-// 	// printf("theirs:%x\n", 4294967296);
+	// ft_printf("  mine:%x\n", 4294967296);
+	// printf("theirs:%x\n", 4294967296);
 
-// 	// ft_printf("m:@moulitest: >%c<\n", 0);
-// 	// printf("t:@moulitest: >%c<\n", 0);
+	ft_putnbr(ft_printf("m:@moulitest: >%c<\n", 0));
+	ft_putnbr(printf("t:@moulitest: >%c<\n", 0));
+	ft_putnbr(printf("  mine:@moulitest: %o|\n", 0));
+	ft_putnbr(ft_printf("theirs:@moulitest: %o|\n", 0));
 
-// 	ft_printf("m:%+u\n", 4294967295);
-// 	printf("t:%+u\n", 4294967295);
-// }
+	// printf("theirs:%lld\n", -9223372036854775808);
+	// ft_printf("  mine:%lld\n", -9223372036854775808);
+}
 
 void	init_arg(t_arg *arg)
 {
@@ -49,11 +51,12 @@ void	init_arg(t_arg *arg)
 	arg->j = 0;
 	arg->z = 0;
 	arg->t = 0;
+	arg->call = 0;
 }
 
 void	init_arg_world(t_arg *args)
 {
-	args->types = ft_strdup("sSpdDioOuUxXcC");
+	args->types = ft_strdup("dDioOuUxXsSpCc%%");
 }
 
 int		parse_args(char *str, t_arg *args)
@@ -78,7 +81,8 @@ int		parse_args(char *str, t_arg *args)
 	while (ft_isdigit(str[i]))
 		i++;
 	if (str[i] == '.')
-		args->precision = abs(atoi_edit(&(str[i + 1])));
+		if (!(args->precision = abs(atoi_edit(&(str[i + 1])))))
+			args->precision = -1;
 	while (str[i] == '.' || ft_isdigit(str[i]))
 		i++;
 	return (i);
@@ -110,12 +114,41 @@ int		parse_flags(char *str, t_arg *args)
 	return (i);
 }
 
+void	num_handler(long long num, t_arg *args)
+{
+	if (args->call == 'd' || args->call == 'i')
+		handle_int(num, args, 0);
+	else if (args->call == 'x')
+		handle_unsigned_int(num, args, 2);
+	else if (args->call == 'X')
+		handle_unsigned_int(num, args, 3);
+	else if (args->call == 'o')
+		handle_octal(num, args);	
+	else if (args->call == 'u' || args->call == 'U')
+		handle_unsigned_int(num, args, 1);
+}
+
+void	char_handler(int c, t_arg *args)
+{
+	if (args->call == 'c')
+		handle_char(c, args);
+	else if (args->call == '%')
+		handle_char(37, args);
+}
+
+void	str_handler(char *str, t_arg *args)
+{
+	if (args->call == 's')
+		handle_string(str, args, 0);
+}
+
 int 	ft_printf(char *str, ...)
 {
 	va_list ap;
 	t_arg	args;
 	int i;
-	//int index;
+	int index;
+
 
 	args.printed_chars = 0;
 	va_start(ap, str);
@@ -136,27 +169,23 @@ int 	ft_printf(char *str, ...)
 		i += parse_args(&(str[i]), &args);
 		i += parse_flags(&(str[i]), &args);
 		
-		// if ((index = ft_strchr(args->types, str[i])) != -1)
-		// {
-
-		// }
-
-		if (str[i] == 'c')
-			handle_char(va_arg(ap, int), &args);
-		else if (str[i] == 'd' || str[i] == 'i')
-			handle_int(va_arg(ap, int), &args, 0);
-		else if (str[i] == 's')
-			handle_string(va_arg(ap, char *), &args, 0);
-		else if (str[i] == '%')
-			handle_char(37, &args);
-		else if (str[i] == 'o')
-			handle_octal(va_arg(ap, int), &args);
-		else if (str[i] == 'x')
-			handle_unsigned_int(va_arg(ap, long long), &args, 2);
-		else if (str[i] == 'X')
-			handle_unsigned_int(va_arg(ap, long long), &args, 3);
-		else if (str[i] == 'u' || str[i] == 'U')
-			handle_unsigned_int(va_arg(ap, long long), &args, 1);
+		if ((index = int_strchr(args.types, str[i])) != -1)
+		{
+			args.call = str[i];
+			if (index <= 8)
+			{
+				if (args.ll)
+					num_handler(va_arg(ap, long long), &args);
+				else if (args.l)
+					num_handler(va_arg(ap, long), &args);
+				else
+					num_handler(va_arg(ap, int), &args);
+			}
+			else if (index >= 13)
+					char_handler(va_arg(ap, int), &args);
+			else
+				str_handler(va_arg(ap, char *), &args);
+		}
 		i++;
 	}
 	va_end(ap);

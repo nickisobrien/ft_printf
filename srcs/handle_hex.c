@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 21:11:58 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/20 14:58:26 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/21 11:49:11 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ void	handle_hex(long long n, t_arg *args, int ct)
 	long long temp;
 	int len;
 
-	//printf("\n|%lld|\n", n);
 	len = 1;
 	temp = n;
 	while (temp /= 16)
 		len++;
 	str = ft_strnew(len);
 	len--;
+	if (args->precision == -1 && !len)
+		return ;
 	if (!n)
 		str[0] = '0';
 	while (n != 0)
