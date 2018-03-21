@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 16:21:23 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/21 14:30:51 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/21 16:20:08 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ int 	ft_printf(char *str, ...);
 // 	// ft_putnbr(printf("  mine:@moulitest: %o|\n", 0));
 // 	// ft_putnbr(ft_printf("theirs:@moulitest: %o|\n", 0));
 	
-// 	// printf("t:%hhd|\n", 128);
-// 	// ft_printf("m:%hhd|\n", 128);
+// 	printf("t:%hhd|\n", 128);
+// 	ft_printf("m:%hhd|\n", 128);
 
-// 	ft_printf("m:%jx|\n", -4294967296);
-// 	printf("t:%jx|\n", -4294967296);
+// 	// ft_printf("m:%jx|\n", -4294967296);
+// 	// printf("t:%jx|\n", -4294967296);
+
+// 	// ft_printf("%U|\n", 4294967296);
+// 	// ft_printf("%u|\n", 4294967296);
 
 // 	// printf("theirs:%lld\n", -9223372036854775808);
 // 	// ft_printf("  mine:%lld\n", -9223372036854775808);
@@ -122,7 +125,9 @@ int		parse_flags(char *str, t_arg *args)
 
 void	num_handler(intmax_t num, t_arg *args)
 {
-	if (args->call == 'd' || args->call == 'i')
+	if (args->hh && (args->call == 'd' || args->call == 'i'))
+		handle_int((char)num, args, 0);
+	else if (args->call == 'd' || args->call == 'i')
 		handle_int(num, args, 0);
 	else if (args->call == 'x')
 		handle_unsigned_int(num, args, 2);
@@ -188,7 +193,9 @@ int 	ft_printf(char *str, ...)
 				else if (args.h)
 					num_handler((short)va_arg(ap, int), &args);
 				else if (args.hh)
-					num_handler((char)va_arg(ap, int), &args);
+					num_handler((signed char)va_arg(ap, int), &args);
+				else if (str[i] == 'u' || str[i] == 'U')
+					num_handler(va_arg(ap, unsigned int), &args);
 				else
 					num_handler(va_arg(ap, int), &args);
 			}
