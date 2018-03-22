@@ -12,7 +12,7 @@ DIR_O = temporary
 
 HEADER = include
 
-SOURCES = atoi_edit.c ft_printf.c handle_char.c handle_hex.c handle_int.c handle_octal.c handle_string.c handle_unsigned.c
+SOURCES = handle_char.c handle_hex.c handle_int.c handle_octal.c handle_string.c handle_unsigned.c ft_printf.c init.c mid_handlers.c parsers.c printf_libft.c 
 
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 

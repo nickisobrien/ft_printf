@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_char.c                                      :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/04 12:14:54 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/22 15:51:06 by nobrien          ###   ########.fr       */
+/*   Created: 2018/03/22 15:10:42 by nobrien           #+#    #+#             */
+/*   Updated: 2018/03/22 15:20:39 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	handle_char(int c, t_arg *args)
+void	init_arg(t_arg *arg)
 {
-	char *str;
+	arg->has_zero = 0;
+	arg->has_minus = 0;
+	arg->has_space = 0;
+	arg->min_width = 0;
+	arg->has_plus = 0;
+	arg->has_pound = 0;
+	arg->precision = 0;
+	arg->hh = 0;
+	arg->ll = 0;
+	arg->h = 0;
+	arg->l = 0;
+	arg->j = 0;
+	arg->z = 0;
+	arg->t = 0;
+	arg->call = 0;
+}
 
-	if (c == 0)
-	{
-		str = ft_strnew(0);
-		ft_putchar(0);
-		args->printed_chars++;
-	}
-	else
-	{
-		str = ft_strnew(1);
-		str[0] = c;
-	}
-	handle_string(str, args, 0);
+void	init_arg_world(t_arg *args)
+{
+	args->types = ft_strdup("dDioOuUxXsSpCc%%");
 }
