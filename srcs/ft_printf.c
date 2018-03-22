@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 16:21:23 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/21 19:33:42 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/21 20:23:38 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ int 	ft_printf(char *str, ...);
 // 	// ft_printf("m:%jx|\n", -4294967296);
 // 	// printf("t:%jx|\n", -4294967296);
 	
-// 	ft_printf("  mine:@moulitest: %c.\n", 0);
-// 	printf("theirs:@moulitest: %c.\n", 0);
+// 	// ft_printf("  mine:@moulitest: %c.\n", 0);
+// 	// printf("theirs:@moulitest: %c.\n", 0);
 
 // 	// ft_printf("%U|\n", 4294967296);
 // 	// ft_printf("%u|\n", 4294967296);
 
-// 	// printf("theirs:%lld\n", -9223372036854775808);
-// 	// ft_printf("  mine:%lld\n", -9223372036854775808);
+// 	printf("theirs:%lld\n", -9223372036854775808);
+// 	ft_printf("  mine:%lld\n", -9223372036854775808);
 // }
 
 void	init_arg(t_arg *arg)

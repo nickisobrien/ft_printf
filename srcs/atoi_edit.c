@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 22:08:22 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/21 12:54:14 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/21 20:24:11 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static void	neg(intmax_t *n, int *negative)
 {
 	if (*n < 0)
 	{
-		*n *= -1;
 		*negative = 1;
 	}
 }
@@ -83,7 +82,7 @@ char		*ft_itoa_edit(intmax_t n)
 	str[--i] = '\0';
 	while (i--)
 	{
-		str[i] = (n % 10) + '0';
+		str[i] = labs((n % 10)) + '0';
 		n /= 10;
 	}
 	if (negative)
