@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 16:21:23 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/22 15:21:40 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/22 16:34:09 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ int 	ft_printf(char *str, ...)
 	int i;
 	int index;
 
-
+	i = 0;
 	args.printed_chars = 0;
 	va_start(ap, str);
-	i = 0;
 	init_arg_world(&args);
 	while (str[i])
 	{
@@ -36,7 +35,7 @@ int 	ft_printf(char *str, ...)
 		args.min_width = labs(atoi_edit(&str[++i])); //can use abs?
 		i += parse_args(&(str[i]), &args);
 		i += parse_flags(&(str[i]), &args);
-		
+
 		if ((index = int_strchr(args.types, str[i])) != -1)
 		{
 			args.call = str[i];
@@ -59,6 +58,8 @@ int 	ft_printf(char *str, ...)
 			}
 			else if (index >= 13)
 				char_handler(va_arg(ap, int), &args);
+			else if (args.call == 'p')
+				ptr_handler(va_arg(ap, int), &args);
 			else
 				str_handler(va_arg(ap, char *), &args);
 		}

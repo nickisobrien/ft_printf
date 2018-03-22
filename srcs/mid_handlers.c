@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:14:30 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/22 15:15:11 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/22 16:23:58 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,14 @@ void	str_handler(char *str, t_arg *args)
 {
 	if (args->call == 's')
 		handle_string(str, args, 0);
+}
+
+void	ptr_handler(int ptr, t_arg *args)
+{
+	if (args->call == 'p')
+	{
+		ft_putstr("0x10");
+		args->printed_chars += 4;
+		ft_printf("%x", ptr);
+	}
 }

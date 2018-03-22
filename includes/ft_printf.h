@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 12:35:39 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/22 15:21:26 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/22 16:21:07 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	init_arg_world(t_arg *arg);
 void	num_handler(intmax_t num, t_arg *args);
 void	char_handler(int c, t_arg *args);
 void	str_handler(char *str, t_arg *args);
+void	ptr_handler(int ptr, t_arg *args);
 
 //main
 int 	ft_printf(char *str, ...);
