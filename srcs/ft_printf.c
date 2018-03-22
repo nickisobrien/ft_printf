@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 16:21:23 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/21 20:23:38 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/22 15:06:28 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,17 @@ int 	ft_printf(char *str, ...);
 
 // int 	main(void)
 // {
-// 	// ft_printf("@m moulitest:%#.x %#.0x<\n", 0, 0);
-// 	// ft_printf("@m moulitest:%.x %.0x<\n", 0, 0);
-// 	// ft_printf("@m moulitest:%5.x %5.0x<\n", 0, 0);
-// 	// ft_printf("@t moulitest:%#.x %#.0x<\n", 0, 0);
-// 	// ft_printf("@t moulitest:%.x %.0x<\n", 0, 0);
-// 	// ft_printf("@t moulitest:%5.x %5.0x<\n", 0, 0);
+// 	printf("t:%jx|\n", -4294967296);
+// 	ft_printf("m:%jx|\n", -4294967296);
 
-// 	// ft_printf("m:%zd|\n", 4294967295);
-// 	// printf("t:%zd|\n", 4294967295);
+// 	printf("t:%x|\n", -42);
+// 	ft_printf("m:%x|\n", -42);
 
-// 	// ft_putnbr(ft_printf("m:@moulitest: >%c<\n", 0));
-// 	// ft_putnbr(printf("t:@moulitest: >%c<\n", 0));
-// 	// ft_putnbr(printf("  mine:@moulitest: %o|\n", 0));
-// 	// ft_putnbr(ft_printf("theirs:@moulitest: %o|\n", 0));
-	
-// 	// printf("t:%hhd|\n", 128);
-// 	// ft_printf("m:%hhd|\n", 128);
+// 	printf("t:%lu|\n", -42);
+// 	ft_printf("m:%lu|\n", -42);
 
-// 	// ft_printf("m:%jx|\n", -4294967296);
-// 	// printf("t:%jx|\n", -4294967296);
-	
-// 	// ft_printf("  mine:@moulitest: %c.\n", 0);
-// 	// printf("theirs:@moulitest: %c.\n", 0);
-
-// 	// ft_printf("%U|\n", 4294967296);
-// 	// ft_printf("%u|\n", 4294967296);
-
-// 	printf("theirs:%lld\n", -9223372036854775808);
-// 	ft_printf("  mine:%lld\n", -9223372036854775808);
+// 	// printf("t:%hU|\n", 4294967296);
+// 	// ft_printf("m:%hU|\n", 4294967296);
 // }
 
 void	init_arg(t_arg *arg)

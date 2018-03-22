@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 12:35:39 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/21 14:15:39 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/22 14:28:17 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	handle_string(char *str, t_arg *args, int ct);
 void	handle_int(intmax_t num, t_arg *args, int ct);
 void	handle_double(double num);
 void	handle_octal(intmax_t octal, t_arg *args);
-void 	handle_hex(intmax_t n, t_arg *args, int ct);
+void 	handle_hex(unsigned long long n, t_arg *args, int ct);
 void	handle_unsigned_int(intmax_t num, t_arg *args, int ct);
 
 intmax_t	atoi_edit(const char *str);
