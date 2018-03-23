@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 12:14:54 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/22 15:51:06 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/23 14:13:51 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,22 @@ void	handle_char(int c, t_arg *args)
 
 	if (c == 0)
 	{
-		str = ft_strnew(0);
+		if (args->min_width)
+			args->printed_chars += args->min_width;
+		else
+			args->printed_chars++;
+		if (!args->has_minus)
+			while (args->min_width-- > 1)
+				ft_putchar(' ');
 		ft_putchar(0);
-		args->printed_chars++;
+		if (args->has_minus)
+			while (args->min_width-- > 1)
+				ft_putchar(' ');
 	}
 	else
 	{
 		str = ft_strnew(1);
 		str[0] = c;
+		handle_string(str, args, 0);
 	}
-	handle_string(str, args, 0);
 }

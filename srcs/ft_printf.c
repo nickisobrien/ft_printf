@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 16:21:23 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/22 16:34:09 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/23 15:12:51 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int 	ft_printf(char *str, ...)
 			continue;
 		}
 		init_arg(&args);
-		args.min_width = labs(atoi_edit(&str[++i])); //can use abs?
+		args.min_width = labs(atoi_edit(&str[++i]));
 		i += parse_args(&(str[i]), &args);
 		i += parse_flags(&(str[i]), &args);
 
@@ -47,12 +47,14 @@ int 	ft_printf(char *str, ...)
 					num_handler(va_arg(ap, long), &args);
 				else if (args.z)
 					num_handler(va_arg(ap, size_t), &args);
+				else if (str[i] == 'U')
+					num_handler(va_arg(ap, uintmax_t), &args);
+				else if (str[i] == 'u')
+					num_handler(va_arg(ap, unsigned int), &args);
 				else if (args.h)
 					num_handler((short)va_arg(ap, int), &args);
 				else if (args.hh)
 					num_handler((signed char)va_arg(ap, int), &args);
-				else if (str[i] == 'u' || str[i] == 'U')
-					num_handler(va_arg(ap, unsigned int), &args);
 				else
 					num_handler(va_arg(ap, int), &args);
 			}
