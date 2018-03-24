@@ -6,16 +6,16 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 21:11:58 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/22 15:51:08 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/23 18:13:00 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	handle_hex(unsigned long long n, t_arg *args, int ct)
+void	handle_hex(uintmax_t n, t_arg *args, int ct)
 {
 	char *str;
-	unsigned long long temp;
+	uintmax_t temp;
 	int len;
 
 	len = 1;

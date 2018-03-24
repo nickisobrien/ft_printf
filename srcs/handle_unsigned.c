@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 22:07:46 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/22 15:51:13 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/23 18:16:19 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	handle_unsigned_int(intmax_t num, t_arg *args, int ct)
 {
+	//might want to make a variable uintmax_t number to accept num = (uintmaxt_t)num; and the rest..
+
 	if (args->has_space) //warning, ' ' is undefined with unsigned
 		args->has_space = 0;
 	if (num < 0)
 	{
-		if (args->j)
+		if (args->j || args->call == 'U')
 			num = (uintmax_t)num;
 		else if (args->ll)
 			num = (unsigned long long)num;
@@ -32,7 +34,7 @@ void	handle_unsigned_int(intmax_t num, t_arg *args, int ct)
 			num = (unsigned int)num;
 	}
 	if (ct == 1)
-		handle_int(num, args, ct);
+		handle_int_string(1, args, ct, ft_utoa_edit(num));
 	else if (ct == 2 || ct == 3)
 		handle_hex(num, args, ct);
 }

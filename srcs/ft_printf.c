@@ -6,11 +6,46 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 16:21:23 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/23 15:12:51 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/23 18:14:48 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+#include <limits.h>
+
+// int		main(void)
+// {
+// 	/*POINTERS*/
+// 	// int i;
+// 	// printf("t:%p|\n", &i);
+// 	// ft_printf("m:%p|\n", &i);
+
+// 	// unsigned long l;
+// 	// printf("t:%p|\n", &l);
+// 	// ft_printf("m:%p|\n", &l);
+
+// 	// char *str;
+// 	// printf("t:%p|\n", &str);
+// 	// ft_printf("m:%p|\n", &str);
+
+// 	// printf("t:%p|\n", &strlen);
+// 	// ft_printf("m:%p|\n", &strlen);
+
+// 	// printf("t:%p|\n", 0);
+// 	// ft_printf("m:%p|\n", 0);
+
+// 	/*POINTERS...*/
+// 	// ft_printf("m:s: %s, p: %p, d:%d\n", "a string", &main, 42);
+// 	// printf("t:s: %s, p: %p, d:%d\n", "a string", &main, 42);
+
+// 	// printf("t:%U\n", ULONG_MAX);
+// 	// ft_printf("m:%U\n", ULONG_MAX);
+
+// 	ft_printf("m%x|\n", -42);
+// 	printf("t%x|\n", -42);
+
+// }
 
 int 	ft_printf(char *str, ...)
 {
@@ -33,6 +68,8 @@ int 	ft_printf(char *str, ...)
 		}
 		init_arg(&args);
 		args.min_width = labs(atoi_edit(&str[++i]));
+		if (!str[i])
+			break;
 		i += parse_args(&(str[i]), &args);
 		i += parse_flags(&(str[i]), &args);
 
@@ -61,11 +98,11 @@ int 	ft_printf(char *str, ...)
 			else if (index >= 13)
 				char_handler(va_arg(ap, int), &args);
 			else if (args.call == 'p')
-				ptr_handler(va_arg(ap, int), &args);
+				ptr_handler(va_arg(ap, intmax_t), &args);
 			else
 				str_handler(va_arg(ap, char *), &args);
+			i++;
 		}
-		i++;
 	}
 	va_end(ap);
 	return (args.printed_chars);

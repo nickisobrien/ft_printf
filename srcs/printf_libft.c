@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 22:08:22 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/22 15:23:06 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/23 18:09:27 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,7 @@ int		strchr_edit(const char *str, int c)
 static void	neg(intmax_t *n, int *negative)
 {
 	if (*n < 0)
-	{
 		*negative = 1;
-	}
 }
 
 char		*ft_itoa_edit(intmax_t n)
@@ -87,6 +85,27 @@ char		*ft_itoa_edit(intmax_t n)
 	}
 	if (negative)
 		str[0] = '-';
+	return (str);
+}
+
+char		*ft_utoa_edit(uintmax_t n)
+{
+	int			i;
+	char		*str;
+	uintmax_t	tmp;
+
+	i = 2;
+	tmp = n;
+	while (tmp /= 10)
+		i++;
+	if (!(str = malloc(i)))
+		return (NULL);
+	str[--i] = '\0';
+	while (i--)
+	{
+		str[i] = (n % 10) + '0';
+		n /= 10;
+	}
 	return (str);
 }
 

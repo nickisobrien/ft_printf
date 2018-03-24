@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 12:12:13 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/22 15:51:10 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/23 18:06:08 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,19 @@ int		ft_countdigits(char *str)
 void	handle_int(intmax_t num, t_arg *args, int ct)
 {
 	char *numstr;
-	char *precision;
-	char *spaces;
 
 	if (num || args->precision != -1)
 		numstr = ft_itoa_edit(num);
 	else
 		numstr = ft_strnew(0);
+	handle_int_string(num, args, ct, numstr);
+}
+
+void	handle_int_string(intmax_t num, t_arg *args, int ct, char *numstr)
+{
+	char *precision;
+	char *spaces;
+
 	if (ft_countdigits(numstr) < args->precision)
 	{
 		precision = ft_strnew(args->precision - ft_countdigits(numstr));
