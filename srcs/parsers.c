@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:11:21 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/22 15:15:12 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/23 19:10:45 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		parse_flags(char *str, t_arg *args)
 		else if (str[i] == 'h')
 			args->h = 1;
 		else if (str[i] == 'l')
-			args->ll = 1;
+			args->l = 1;
 		else if (str[i] == 'j')
 			args->j = 1;
 		else if (str[i] == 'z')
