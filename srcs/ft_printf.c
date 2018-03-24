@@ -6,45 +6,13 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 16:21:23 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/23 20:44:45 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/24 15:55:49 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
 #include <limits.h>
-
-// int		main(void)
-// {
-// 	/*POINTERS*/
-// 	// int i;
-// 	// printf("t:%p|\n", &i);
-// 	// ft_printf("m:%p|\n", &i);
-
-// 	// unsigned long l;
-// 	// printf("t:%p|\n", &l);
-// 	// ft_printf("m:%p|\n", &l);
-
-// 	// char *str;
-// 	// printf("t:%p|\n", &str);
-// 	// ft_printf("m:%p|\n", &str);
-
-// 	// printf("t:%p|\n", &strlen);
-// 	// ft_printf("m:%p|\n", &strlen);
-
-// 	// printf("t:%p|\n", 0);
-// 	// ft_printf("m:%p|\n", 0);
-
-// 	/*POINTERS...*/
-// 	// ft_printf("m:s: %s, p: %p, d:%d\n", "a string", &main, 42);
-// 	// printf("t:s: %s, p: %p, d:%d\n", "a string", &main, 42);
-
-// 	// printf("t%lo|\n", ULONG_MAX);
-// 	// ft_printf("m%lo|\n", ULONG_MAX);
-
-// 	ft_printf("@moulitest: %o", 0);
-
-// }
 
 int 	ft_printf(char *str, ...)
 {
@@ -76,30 +44,13 @@ int 	ft_printf(char *str, ...)
 		{
 			args.call = str[i];
 			if (index <= 8)
-			{
-				if (args.j || args.ll)
-					num_handler(va_arg(ap, intmax_t), &args);
-				else if (args.l)
-					num_handler(va_arg(ap, long), &args);
-				else if (args.z)
-					num_handler(va_arg(ap, size_t), &args);
-				else if (str[i] == 'U')
-					num_handler(va_arg(ap, uintmax_t), &args);
-				else if (str[i] == 'u')
-					num_handler(va_arg(ap, unsigned int), &args);
-				else if (args.h)
-					num_handler((short)va_arg(ap, int), &args);
-				else if (args.hh)
-					num_handler((signed char)va_arg(ap, int), &args);
-				else
-					num_handler(va_arg(ap, int), &args);
-			}
+				num_handler(ap, &args);
 			else if (index >= 13)
-				char_handler(va_arg(ap, int), &args);
+				char_handler(ap, &args);
 			else if (args.call == 'p')
-				ptr_handler(va_arg(ap, intmax_t), &args);
+				ptr_handler(ap, &args);
 			else
-				str_handler(va_arg(ap, char *), &args);
+				str_handler(ap, &args);
 			i++;
 		}
 	}

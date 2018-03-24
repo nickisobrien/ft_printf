@@ -6,45 +6,84 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:14:30 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/23 19:21:18 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/24 15:55:24 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	num_handler(intmax_t num, t_arg *args)
+void	num_handler(va_list ap, t_arg *args)
 {
-	// printf(">%lo<", num);
-	if (args->hh && (args->call == 'd' || args->call == 'i'))
-		handle_int((char)num, args, 0);
-	else if (args->call == 'd' || args->call == 'i')
-		handle_int(num, args, 0);
-	else if (args->call == 'x')
-		handle_unsigned_int(num, args, 2);
-	else if (args->call == 'X')
-		handle_unsigned_int(num, args, 3);
-	else if (args->call == 'o')
-		handle_octal(num, args);	
+	uintmax_t num;
+
+	if (args->call == 'd' || args->call == 'i')
+	{
+		if (args->hh)
+			handle_int((char)va_arg(ap, int), args, 0);
+		else if (args->h)
+			handle_int((short)va_arg(ap, int), args, 0);
+		else if (args->z)
+			handle_int(va_arg(ap, size_t), args, 0);
+		else if (args->l)
+			handle_int(va_arg(ap, long), args, 0);
+		else if (args->ll)
+			handle_int(va_arg(ap, long long), args, 0);
+		else if (args->j)
+			handle_int(va_arg(ap, uintmax_t), args, 0);
+		else
+			handle_int(va_arg(ap, int), args, 0);
+	}
+	else if (ft_tolower(args->call) == 'u' || ft_tolower(args->call) == 'o' || ft_tolower(args->call) == 'x')
+	{
+		if (args->has_space) //warning, ' ' is undefined with unsigned
+			args->has_space = 0;
+		if (args->hh)
+			num = (unsigned char)va_arg(ap, int);
+		else if (args->l || args->call == 'U')
+			num = va_arg(ap, unsigned long);
+		else if (args->ll)
+			num = va_arg(ap, unsigned long long);
+		else if (args->j)
+			num = va_arg(ap, uintmax_t);
+		else if (args->h)
+			num = (unsigned short)va_arg(ap, int);
+		else if (args->z)
+			num = va_arg(ap, size_t);
+		else
+			num = va_arg(ap, unsigned int);
+	}
+	if (args->call == 'o')
+		handle_octal(num, args);
+	else if (ft_tolower(args->call) == 'x')
+	{
+		handle_hex(num, args);
+	}
 	else if (args->call == 'u' || args->call == 'U')
-		handle_unsigned_int(num, args, 1);
+	{
+		if (args->precision == -1)
+			handle_int_string(1, args, 1, ft_strnew(0));
+		else
+			handle_int_string(1, args, 1, ft_utoa_edit(num));
+	}
 }
 
-void	char_handler(int c, t_arg *args)
+void	char_handler(va_list ap, t_arg *args)
 {
 	if (args->call == 'c')
-		handle_char(c, args);
+		handle_char((char)va_arg(ap, int), args);
 	else if (args->call == '%')
 		handle_char(37, args);
 }
 
-void	str_handler(char *str, t_arg *args)
+void	str_handler(va_list ap, t_arg *args)
 {
 	if (args->call == 's')
-		handle_string(str, args, 0);
+		handle_string(va_arg(ap, char *), args);
 }
 
-void	ptr_handler(intmax_t ptr, t_arg *args)
+void	ptr_handler(va_list ap, t_arg *args)
 {
+	intmax_t ptr = va_arg(ap, intmax_t);
 	if (ptr == 0)
 		ft_putstr("0x0");
 	else
@@ -54,3 +93,9 @@ void	ptr_handler(intmax_t ptr, t_arg *args)
 		ft_printf("%x", ptr);
 	}
 }
+
+
+
+
+
+

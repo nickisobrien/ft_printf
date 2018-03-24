@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 12:12:13 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/23 20:35:29 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/24 13:44:41 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,28 @@ void	replace_zeros(char *str)
 void	fix_signs(char *str)
 {
 	int i;
+	int j;
+	char tmp;
 
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '+' && str[0] != ' ')
+		if (str[i] == '+' || str[i] == '-' || str[i] == 'x')
 		{
-			str[i] = str[0];
-			str[0] = '+';
-		}
-		else if (str[i] == '-' && str[0] != ' ')
-		{
-			str[i] = str[0];
-			str[0] = '-';
-		}
-		else if (str[i] == 'x')
-		{
-			str[i] = str[1];
-			str[1] = 'x';
+			j = 0;
+			while (str[j])
+			{
+				if (ft_isdigit(str[j]))
+				{
+					if (str[i] == 'x')
+						j++;
+					tmp = str[i];
+					str[i] = str[j];
+					str[j] = tmp;
+					break;
+				}
+				j++;
+			}
 		}
 		i++;
 	}

@@ -6,13 +6,13 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 21:11:58 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/23 18:13:00 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/24 15:35:24 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	handle_hex(uintmax_t n, t_arg *args, int ct)
+void	handle_hex(uintmax_t n, t_arg *args)
 {
 	char *str;
 	uintmax_t temp;
@@ -40,8 +40,8 @@ void	handle_hex(uintmax_t n, t_arg *args, int ct)
 	}
 	if (args->has_pound && str[0] != '0')
 		str = ft_strjoin("0x", str); //need to free str?
-	if (ct == 3)
+	if (args->call == 'X')
 		ft_strupper(str);
 	//might need to change so i can handle 08x
-	handle_string(str, args, ct);
+	handle_string(str, args);
 }

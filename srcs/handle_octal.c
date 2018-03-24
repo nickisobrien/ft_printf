@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 20:26:36 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/23 20:46:44 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/24 15:35:08 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	handle_octal(uintmax_t num, t_arg *args)
 			str = ft_strjoin(spaces, str);
 	}
 	if (str[0])
-		handle_string(str, args, 1);
+		handle_string(str, args);
 	else
 	{
 		if (args->precision != -1)

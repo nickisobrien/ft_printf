@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 17:55:05 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/23 13:58:55 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/24 15:33:42 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ char	*handle_width(char *str, t_arg *args)
 	return (str);
 }
 
-void	handle_string(char *str, t_arg *args, int ct)
+void	handle_string(char *str, t_arg *args)
 {
 	char	*newstr;
 	
 	if (!str)
 		str = ft_strdup("(null)");
-	if ((int)ft_strlen(str) > args->precision && args->precision != 0 && args->precision != -1 && !ct)
+	if ((int)ft_strlen(str) > args->precision && args->precision != 0 && args->precision != -1 && ft_tolower(args->call) != 'x')
 	{
 		newstr = ft_strnew(args->precision);
 		ft_strncpy(newstr, str, args->precision);
