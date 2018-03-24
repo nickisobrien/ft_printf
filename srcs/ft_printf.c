@@ -6,13 +6,45 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 16:21:23 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/23 19:15:20 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/23 20:44:45 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
 #include <limits.h>
+
+// int		main(void)
+// {
+// 	/*POINTERS*/
+// 	// int i;
+// 	// printf("t:%p|\n", &i);
+// 	// ft_printf("m:%p|\n", &i);
+
+// 	// unsigned long l;
+// 	// printf("t:%p|\n", &l);
+// 	// ft_printf("m:%p|\n", &l);
+
+// 	// char *str;
+// 	// printf("t:%p|\n", &str);
+// 	// ft_printf("m:%p|\n", &str);
+
+// 	// printf("t:%p|\n", &strlen);
+// 	// ft_printf("m:%p|\n", &strlen);
+
+// 	// printf("t:%p|\n", 0);
+// 	// ft_printf("m:%p|\n", 0);
+
+// 	/*POINTERS...*/
+// 	// ft_printf("m:s: %s, p: %p, d:%d\n", "a string", &main, 42);
+// 	// printf("t:s: %s, p: %p, d:%d\n", "a string", &main, 42);
+
+// 	// printf("t%lo|\n", ULONG_MAX);
+// 	// ft_printf("m%lo|\n", ULONG_MAX);
+
+// 	ft_printf("@moulitest: %o", 0);
+
+// }
 
 int 	ft_printf(char *str, ...)
 {

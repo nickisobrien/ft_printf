@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 12:35:39 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/23 18:13:09 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/23 20:25:59 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	handle_string(char *str, t_arg *args, int ct);
 void	handle_int(intmax_t num, t_arg *args, int ct);
 void	handle_int_string(intmax_t num, t_arg *args, int ct, char *numstr);
 void	handle_double(double num);
-void	handle_octal(intmax_t octal, t_arg *args);
+void	handle_octal(uintmax_t octal, t_arg *args);
 void 	handle_hex(uintmax_t n, t_arg *args, int ct);
 void	handle_unsigned_int(intmax_t num, t_arg *args, int ct);
 
@@ -75,6 +75,8 @@ void	replace_zeros(char *str);
 int		int_strchr(const char *str, int c);
 void	fix_signs(char *str);
 char	*ft_utoa_edit(uintmax_t n);
+int		ft_countdigits(char *str);
+char	*add_prefix(char *numstr, t_arg *args, int num, int ct);
 
 
 #endif

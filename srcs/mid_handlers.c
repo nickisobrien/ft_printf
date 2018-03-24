@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:14:30 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/23 17:35:40 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/23 19:21:18 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	num_handler(intmax_t num, t_arg *args)
 {
-	// printf(">%jd<", num);
+	// printf(">%lo<", num);
 	if (args->hh && (args->call == 'd' || args->call == 'i'))
 		handle_int((char)num, args, 0);
 	else if (args->call == 'd' || args->call == 'i')

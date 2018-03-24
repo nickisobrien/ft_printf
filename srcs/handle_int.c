@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 12:12:13 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/23 18:06:08 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/23 20:35:29 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,17 @@ int		ft_countdigits(char *str)
 	return (i);
 }
 
+char	*add_prefix(char *numstr, t_arg *args, int num, int ct)
+{
+	if (args->has_pound && args->call == 'o')//octal call with #
+		numstr = ft_strjoin("0", numstr);
+	else if (args->has_plus && num >= 0 && ct != 1)//unsigned w//need to free numstr?
+		numstr = ft_strjoin("+", numstr);
+	else if (args->has_space && num >= 0 && ct != 1)
+		numstr = ft_strjoin(" ", numstr);//need to free numstr?
+	return (numstr);
+}
+
 void	handle_int(intmax_t num, t_arg *args, int ct)
 {
 	char *numstr;
@@ -88,13 +99,7 @@ void	handle_int_string(intmax_t num, t_arg *args, int ct, char *numstr)
 		ft_memset(precision, '0', args->precision - ft_countdigits(numstr));
 		numstr = ft_strjoin(precision, numstr);//need to free numstr/precision? 
 	}
-	if (args->has_pound && ct == 2)//octal call with #
-		numstr = ft_strjoin("0", numstr);
-	else if (args->has_plus && num >= 0 && ct != 1)//unsigned w//need to free numstr?
-		numstr = ft_strjoin("+", numstr);
-	else if (args->has_space && num >= 0 && ct != 1)
-		numstr = ft_strjoin(" ", numstr);//need to free numstr?
-
+	numstr = add_prefix(numstr, args, num, ct);
 	if ((int)ft_strlen(numstr) < args->min_width)
 	{
 		spaces = ft_strnew(args->min_width - ft_strlen(numstr));
