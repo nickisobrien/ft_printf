@@ -6,13 +6,11 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 16:21:23 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/24 15:55:49 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/25 14:50:20 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-#include <limits.h>
 
 int 	ft_printf(char *str, ...)
 {

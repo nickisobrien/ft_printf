@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 12:35:39 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/24 15:34:45 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/25 14:48:24 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@
 
 #include "../libft/libft.h"
 
+# define BUFF_SIZE 124
+
 typedef struct 	s_arg
 {
+	char	buf[BUFF_SIZE];
+	int		buff_index;
 	char	*types;
 	char	call;
 	int		has_space;
