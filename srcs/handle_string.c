@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 17:55:05 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/24 15:33:42 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/25 15:10:36 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	handle_string(char *str, t_arg *args)
 	str = handle_width(str, args);
 	if (args->has_zero && !args->has_minus) //0 flag is ignored with minus flag
 		replace_zeros(str);
-	args->printed_chars += ft_strlen(str);
-	ft_putstr(str);
+	while (*str)
+	{
+		add_char(*str, args);
+		str++;//move str++ up;
+	}
 }

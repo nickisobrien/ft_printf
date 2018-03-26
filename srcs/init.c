@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:10:42 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/22 15:20:39 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/25 15:17:31 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ void	init_arg(t_arg *arg)
 void	init_arg_world(t_arg *args)
 {
 	args->types = ft_strdup("dDioOuUxXsSpCc%%");
+	args->index = 0;
 }

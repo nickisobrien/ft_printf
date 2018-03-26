@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 22:08:22 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/23 18:09:27 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/26 15:10:00 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,3 +122,67 @@ int		int_strchr(const char *str, int c)
 	}
 	return (i);
 }
+
+int		ft_wstrlen(wchar_t *str)
+{
+	size_t i;
+
+	i = 0;
+	while (*str)
+	{
+		if (*str <= 0x7F)
+			i++;
+		else if (*str <= 0x7FF)
+			i += 2;
+		else if (*str <= 0xFFFF)
+			i += 3;
+		else if (*str <= 0x10FFFF)
+			i += 4;
+		str++;
+	}
+	return (i);
+}
+
+wchar_t	*ft_wstrnew(size_t size)
+{
+	return ((wchar_t *)ft_memalloc(size + 1));
+}
+
+char	*itoa_base(uintmax_t n, int base)
+{
+	char *str;
+	uintmax_t temp;
+	int len;
+
+	len = 1;
+	temp = n;
+	while (temp /= base)
+		len++;
+	str = ft_strnew(len);
+	len--;
+	while (n != 0)
+	{
+		temp = n % base;
+		if (temp < 10)
+			str[len] = temp + '0';
+		else
+			str[len] = temp + 'a' - 10;
+		n /= base;
+		len--;
+	}
+	return (str);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

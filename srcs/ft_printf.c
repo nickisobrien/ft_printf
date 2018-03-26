@@ -6,11 +6,29 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 16:21:23 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/25 14:50:20 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/26 15:12:30 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+#include <limits.h>
+#include <locale.h>
+
+void	add_char(char c, t_arg *args)
+{
+	if (args->index + sizeof(c) == BUFF_SIZE)
+		flush(args);
+	args->buf[args->index] = c;
+	args->index += sizeof(c);
+}
+
+void	flush(t_arg *args)
+{
+	write(1, args->buf, args->index);
+	args->printed_chars += args->index;
+	args->index = 0;
+}
 
 int 	ft_printf(char *str, ...)
 {
@@ -27,8 +45,7 @@ int 	ft_printf(char *str, ...)
 	{
 		if (str[i] != '%')
 		{
-			ft_putchar(str[i++]);
-			args.printed_chars++;
+			add_char(str[i++], &args);
 			continue;
 		}
 		init_arg(&args);
@@ -43,15 +60,16 @@ int 	ft_printf(char *str, ...)
 			args.call = str[i];
 			if (index <= 8)
 				num_handler(ap, &args);
-			else if (index >= 13)
+			else if (index >= 12)
 				char_handler(ap, &args);
 			else if (args.call == 'p')
 				ptr_handler(ap, &args);
-			else
+			else if (index >= 9 && index <= 10)
 				str_handler(ap, &args);
 			i++;
 		}
 	}
+	flush(&args);
 	va_end(ap);
 	return (args.printed_chars);
 }

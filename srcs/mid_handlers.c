@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:14:30 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/25 14:29:47 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/26 14:31:33 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,12 @@ void	num_handler(va_list ap, t_arg *args)
 	}
 	else if (ft_tolower(args->call) == 'u' || ft_tolower(args->call) == 'o' || ft_tolower(args->call) == 'x')
 	{
-		if (args->has_space) //warning, ' ' is undefined with unsigned
+		if (args->has_space || args->has_plus) //warning, ' ' is undefined with unsigned
+		{
+			args->has_plus = 0;
 			args->has_space = 0;
-		if (args->l || args->call == 'U')
+		}
+		if (args->l || (ft_upper(args->call) && args->call != 'X'))
 			num = va_arg(ap, unsigned long);
 		else if (args->ll)
 			num = va_arg(ap, unsigned long long);
@@ -55,9 +58,7 @@ void	num_handler(va_list ap, t_arg *args)
 	if (ft_tolower(args->call) == 'o')
 		handle_octal(num, args);
 	else if (ft_tolower(args->call) == 'x')
-	{
 		handle_hex(num, args);
-	}
 	else if (args->call == 'u' || args->call == 'U')
 	{
 		if (args->precision == -1)
@@ -69,7 +70,9 @@ void	num_handler(va_list ap, t_arg *args)
 
 void	char_handler(va_list ap, t_arg *args)
 {
-	if (args->call == 'c')
+	if (args->call == 'C' || (args->l && args->call == 'c'))
+		handle_wchar(va_arg(ap, wchar_t), args);
+	else if (args->call == 'c')
 		handle_char((char)va_arg(ap, int), args);
 	else if (args->call == '%')
 		handle_char(37, args);
@@ -77,8 +80,11 @@ void	char_handler(va_list ap, t_arg *args)
 
 void	str_handler(va_list ap, t_arg *args)
 {
-	if (args->call == 's')
+	if (args->call == 'S' || (args->l && args->call == 's'))
+		handle_wstring(va_arg(ap, wchar_t *), args);
+	else if (args->call == 's')
 		handle_string(va_arg(ap, char *), args);
+
 }
 
 void	ptr_handler(va_list ap, t_arg *args)

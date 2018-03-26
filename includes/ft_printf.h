@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 12:35:39 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/25 14:48:24 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/26 15:10:33 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <wchar.h>
 
 #include "../libft/libft.h"
 
@@ -24,7 +25,7 @@
 typedef struct 	s_arg
 {
 	char	buf[BUFF_SIZE];
-	int		buff_index;
+	int		index;
 	char	*types;
 	char	call;
 	int		has_space;
@@ -53,6 +54,9 @@ void	handle_double(double num);
 void	handle_octal(uintmax_t octal, t_arg *args);
 void 	handle_hex(uintmax_t n, t_arg *args);
 void	handle_unsigned_int(intmax_t num, t_arg *args, int ct);
+void	handle_wchar(int c, t_arg *args);
+void	add_wchar(wchar_t c, t_arg *args);
+void	handle_wstring(wchar_t *str, t_arg *args);
 
 //init
 void	init_arg(t_arg *arg);
@@ -66,6 +70,8 @@ void	char_handler(va_list ap, t_arg *args);
 
 //main
 int 	ft_printf(char *str, ...);
+void	flush(t_arg *args);
+void	add_char(char c, t_arg *args);
 
 //parsers
 int		parse_args(char *str, t_arg *args);
@@ -81,6 +87,10 @@ void	fix_signs(char *str);
 char	*ft_utoa_edit(uintmax_t n);
 int		ft_countdigits(char *str);
 char	*add_prefix(char *numstr, t_arg *args, int num, int ct);
+char	*itoa_base(uintmax_t n, int base);
 
+int		wchar_bytes(wchar_t w);
+int		ft_wstrlen(wchar_t *str);
+wchar_t	*ft_wstrnew(size_t size);
 
 #endif

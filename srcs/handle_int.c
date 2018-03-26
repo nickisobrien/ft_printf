@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 12:12:13 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/24 13:44:41 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/26 14:58:35 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		ft_countdigits(char *str)
 
 char	*add_prefix(char *numstr, t_arg *args, int num, int ct)
 {
-	if (args->has_pound && args->call == 'o')//octal call with #
+	if (args->has_pound && ft_tolower(args->call) == 'o')//octal call with #
 		numstr = ft_strjoin("0", numstr);
 	else if (args->has_plus && num >= 0 && ct != 1)//unsigned w//need to free numstr?
 		numstr = ft_strjoin("+", numstr);
@@ -117,8 +117,8 @@ void	handle_int_string(intmax_t num, t_arg *args, int ct, char *numstr)
 		replace_zeros(numstr);
 	else
 		fix_signs(numstr);
-	args->printed_chars += ft_strlen(numstr);
-	ft_putstr(numstr);
+	while (*numstr)
+		add_char(*numstr++, args);
 }
 
 
