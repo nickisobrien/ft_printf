@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 12:35:39 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/26 15:10:33 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/26 19:43:17 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	init_arg_world(t_arg *arg);
 
 //mid handlers
 void	num_handler(va_list ap, t_arg *args);
+void	unum_handler(va_list ap, t_arg *args);
 void	str_handler(va_list ap, t_arg *args);
 void	ptr_handler(va_list ap, t_arg *args);
 void	char_handler(va_list ap, t_arg *args);
@@ -81,13 +82,13 @@ int		parse_flags(char *str, t_arg *args);
 intmax_t	atoi_edit(const char *str);
 int		strchr_edit(const char *str, int c);
 char	*ft_itoa_edit(intmax_t n);
-void	replace_zeros(char *str);
+void	replace_zeros(char *str, int has_space);
 int		int_strchr(const char *str, int c);
 void	fix_signs(char *str);
 char	*ft_utoa_edit(uintmax_t n);
 int		ft_countdigits(char *str);
 char	*add_prefix(char *numstr, t_arg *args, int num, int ct);
-char	*itoa_base(uintmax_t n, int base);
+char	*utoa_base(uintmax_t n, int base);
 
 int		wchar_bytes(wchar_t w);
 int		ft_wstrlen(wchar_t *str);

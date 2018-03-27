@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 16:21:23 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/26 15:12:30 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/26 19:41:36 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 #include <limits.h>
 #include <locale.h>
+
+// int		main(void)
+// {
+// 	char c;
+
+// 	ft_printf("  mine:%p\n", &c);
+// 	printf("theirs:%p\n", &c);
+// }
 
 void	add_char(char c, t_arg *args)
 {
@@ -34,39 +42,37 @@ int 	ft_printf(char *str, ...)
 {
 	va_list ap;
 	t_arg	args;
-	int i;
-	int index;
+	int 	index;
 
-	i = 0;
-	args.printed_chars = 0;
 	va_start(ap, str);
 	init_arg_world(&args);
-	while (str[i])
+	while (*str)
 	{
-		if (str[i] != '%')
+		if (*str != '%')
 		{
-			add_char(str[i++], &args);
+			add_char(*str++, &args);
 			continue;
 		}
 		init_arg(&args);
-		args.min_width = labs(atoi_edit(&str[++i]));
-		if (!str[i])
+		args.min_width = labs(atoi_edit(++str));
+		if (!*str)
 			break;
-		i += parse_args(&(str[i]), &args);
-		i += parse_flags(&(str[i]), &args);
-
-		if ((index = int_strchr(args.types, str[i])) != -1)
+		str += parse_args(str, &args);
+		str += parse_flags(str, &args);
+		if ((index = int_strchr(args.types, *str)) != -1)
 		{
-			args.call = str[i];
-			if (index <= 8)
+			args.call = *str;
+			if (index <= 2)
 				num_handler(ap, &args);
+			else if (index <= 8)
+				unum_handler(ap, &args);
 			else if (index >= 12)
 				char_handler(ap, &args);
 			else if (args.call == 'p')
 				ptr_handler(ap, &args);
 			else if (index >= 9 && index <= 10)
 				str_handler(ap, &args);
-			i++;
+			str++;
 		}
 	}
 	flush(&args);

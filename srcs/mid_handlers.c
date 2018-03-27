@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:14:30 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/26 14:31:33 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/26 19:42:26 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	num_handler(va_list ap, t_arg *args)
 {
-	uintmax_t num;
-
 	if (ft_tolower(args->call) == 'd' || ft_tolower(args->call) == 'i')
 	{
 		if (args->l || ft_upper(args->call))
@@ -33,7 +31,13 @@ void	num_handler(va_list ap, t_arg *args)
 		else
 			handle_int(va_arg(ap, int), args, 0);
 	}
-	else if (ft_tolower(args->call) == 'u' || ft_tolower(args->call) == 'o' || ft_tolower(args->call) == 'x')
+}
+
+void	unum_handler(va_list ap, t_arg *args)
+{
+	uintmax_t unum;
+
+	if (ft_tolower(args->call) == 'u' || ft_tolower(args->call) == 'o' || ft_tolower(args->call) == 'x')
 	{
 		if (args->has_space || args->has_plus) //warning, ' ' is undefined with unsigned
 		{
@@ -41,30 +45,30 @@ void	num_handler(va_list ap, t_arg *args)
 			args->has_space = 0;
 		}
 		if (args->l || (ft_upper(args->call) && args->call != 'X'))
-			num = va_arg(ap, unsigned long);
+			unum = va_arg(ap, unsigned long);
 		else if (args->ll)
-			num = va_arg(ap, unsigned long long);
+			unum = va_arg(ap, unsigned long long);
 		else if (args->j)
-			num = va_arg(ap, uintmax_t);
+			unum = va_arg(ap, uintmax_t);
 		else if (args->h)
-			num = (unsigned short)va_arg(ap, int);
+			unum = (unsigned short)va_arg(ap, int);
 		else if (args->hh)
-			num = (unsigned char)va_arg(ap, int);
+			unum = (unsigned char)va_arg(ap, int);
 		else if (args->z)
-			num = va_arg(ap, size_t);
+			unum = va_arg(ap, size_t);
 		else
-			num = va_arg(ap, unsigned int);
+			unum = va_arg(ap, unsigned int);
 	}
 	if (ft_tolower(args->call) == 'o')
-		handle_octal(num, args);
+		handle_octal(unum, args);
 	else if (ft_tolower(args->call) == 'x')
-		handle_hex(num, args);
+		handle_hex(unum, args);
 	else if (args->call == 'u' || args->call == 'U')
 	{
 		if (args->precision == -1)
 			handle_int_string(1, args, 1, ft_strnew(0));
 		else
-			handle_int_string(1, args, 1, ft_utoa_edit(num));
+			handle_int_string(1, args, 1, ft_utoa_edit(unum));
 	}
 }
 
@@ -89,14 +93,23 @@ void	str_handler(va_list ap, t_arg *args)
 
 void	ptr_handler(va_list ap, t_arg *args)
 {
-	intmax_t ptr = va_arg(ap, intmax_t);
+	void *ptr;
+	char *str;
+
+	ptr = va_arg(ap, void *);
 	if (ptr == 0)
-		ft_putstr("0x0");
+	{
+		add_char('0', args);
+		add_char('x', args);
+		add_char('0', args);
+	}
 	else
 	{
-		ft_putstr("0x10");
-		args->printed_chars += 4;
-		ft_printf("%x", ptr);
+		add_char('0', args);
+		add_char('x', args);
+		str = utoa_base((uintmax_t)ptr, 16);
+		while (*str)
+			add_char(*str++, args);
 	}
 }
 

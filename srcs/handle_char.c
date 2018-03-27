@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 12:14:54 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/25 17:01:04 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/26 15:23:58 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ void	handle_char(int c, t_arg *args)
 
 	if (c == 0)
 	{
-		filler = ' ';
-		if (args->has_zero)
-			filler = '0';
+		filler = args->has_zero ? '0' : ' ';
 		if (!args->has_minus)
 			while (args->min_width-- > 1)
 				add_char(filler, args);

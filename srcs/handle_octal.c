@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 20:26:36 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/26 14:58:16 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/26 19:43:04 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,8 @@ void	handle_octal(uintmax_t num, t_arg *args)
 	char *str;
 	char *spaces;
 	int i;
-	int j;
-	uintmax_t tmp;
 
-	i = 0;
-	tmp = num;
-	while (tmp != 0)
-	{
-		tmp /= 8;
-		i++;
-	}
-
-	j = 1;
-	str = ft_strnew(i);
-	i--;
-	while (num != 0)
-	{
-		str[i] = (num % 8) + '0';
-		num /= 8;
-		j *= 10;
-		i--;
-	}
+	str = utoa_base(num, 8);
 	if (ft_countdigits(str) < args->precision)
 	{
 		spaces = ft_strnew(args->precision - ft_countdigits(str));
