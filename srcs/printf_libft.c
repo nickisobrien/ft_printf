@@ -233,11 +233,17 @@ int		ft_countdigits(char *str)
 
 char	*add_prefix(char *numstr, t_arg *args, int num, int ct)
 {
+	char *ptr;
+
+	ptr = numstr;
 	if (args->has_pound && ft_tolower(args->call) == 'o')//octal call with #
 		numstr = ft_strjoin("0", numstr);
 	else if (args->has_plus && num >= 0 && ct != 1)//unsigned w//need to free numstr?
 		numstr = ft_strjoin("+", numstr);
 	else if (args->has_space && num >= 0 && ct != 1)
-		numstr = ft_strjoin(" ", numstr);//need to free numstr?
+		numstr = ft_strjoin(" ", numstr);
+	else
+		numstr = ft_strdup(numstr);
+	ft_strdel(&ptr);
 	return (numstr);
 }

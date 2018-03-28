@@ -34,12 +34,14 @@ void	handle_int_string(intmax_t num, t_arg *args, int ct, char *numstr)
 		precision = ft_strnew(args->precision - ft_countdigits(numstr));
 		ft_memset(precision, '0', args->precision - ft_countdigits(numstr));
 		ptr = numstr;
-		numstr = ft_strjoin(precision, numstr);//need to free numstr/precision?
+		numstr = ft_strjoin(precision, numstr);
 		ft_strdel(&ptr);
+		ft_strdel(&precision);
 	}
 	numstr = add_prefix(numstr, args, num, ct);
 	if ((int)ft_strlen(numstr) < args->min_width)
 	{
+		ptr = numstr;
 		spaces = ft_strnew(args->min_width - ft_strlen(numstr));
 		ft_memset(spaces, ' ', args->min_width - ft_strlen(numstr));
 		if (args->has_minus)
@@ -47,8 +49,9 @@ void	handle_int_string(intmax_t num, t_arg *args, int ct, char *numstr)
 		else
 			numstr = ft_strjoin(spaces, numstr);
 		ft_strdel(&spaces);
+		ft_strdel(&ptr);
 	}
-	if (args->has_zero && !args->has_minus && !args->precision) //0 flag is ignored with minus flag
+	if (args->has_zero && !args->has_minus && !args->precision)
 		replace_zeros(numstr, args->has_space);
 	else
 		fix_signs(numstr);

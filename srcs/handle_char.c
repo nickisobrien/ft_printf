@@ -33,5 +33,6 @@ void	handle_char(int c, t_arg *args)
 		str = ft_strnew(1);
 		str[0] = c;
 		handle_string(str, args);
+		free(str);
 	}
 }

@@ -15,6 +15,7 @@
 void	handle_hex(uintmax_t n, t_arg *args)
 {
 	char *str;
+	char *ptr;
 
 	if (args->precision == -1 && !args->min_width)
 		return ;
@@ -26,8 +27,13 @@ void	handle_hex(uintmax_t n, t_arg *args)
 	else
 		str = utoa_base(n, 16);
 	if (args->has_pound && str[0] != '0')
+	{
+		ptr = str;
 		str = ft_strjoin("0x", str); //need to free str?
+		free(ptr);
+	}
 	if (ft_upper(args->call))
 		ft_strupper(str);
 	handle_string(str, args);
+	free(str);
 }

@@ -39,11 +39,8 @@ void	unum_handler(va_list ap, t_arg *args)
 
 	if (ft_tolower(args->call) == 'u' || ft_tolower(args->call) == 'o' || ft_tolower(args->call) == 'x')
 	{
-		if (args->has_space || args->has_plus) //warning, ' ' is undefined with unsigned
-		{
-			args->has_plus = 0;
-			args->has_space = 0;
-		}
+		args->has_plus = 0;
+		args->has_space = 0;
 		if (args->l || (ft_upper(args->call) && args->call != 'X'))
 			unum = va_arg(ap, unsigned long);
 		else if (args->ll)
@@ -95,7 +92,9 @@ void	ptr_handler(va_list ap, t_arg *args)
 {
 	void *ptr;
 	char *str;
+	int i;
 
+	i = 0;
 	ptr = va_arg(ap, void *);
 	if (ptr == 0)
 	{
@@ -108,8 +107,9 @@ void	ptr_handler(va_list ap, t_arg *args)
 		add_char('0', args);
 		add_char('x', args);
 		str = utoa_base((uintmax_t)ptr, 16);
-		while (*str)
-			add_char(*str++, args);
+		while (str[i])
+			add_char(str[i++], args);
+		ft_strdel(&str);
 	}
 }
 

@@ -15,14 +15,6 @@
 #include <limits.h>
 #include <locale.h>
 
-// int		main(void)
-// {
-// 	char c;
-
-// 	ft_printf("  mine:%p\n", &c);
-// 	printf("theirs:%p\n", &c);
-// }
-
 void	add_char(char c, t_arg *args)
 {
 	if (args->index + sizeof(c) == BUFF_SIZE)

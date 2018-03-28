@@ -36,18 +36,20 @@ char	*handle_width(char *str, t_arg *args)
 void	handle_string(char *str, t_arg *args)
 {
 	char	*newstr;
-	
+	int		i;
+
+	i = 0;
 	if (!str)
 		str = "(null)";
 	if ((int)ft_strlen(str) > args->precision && args->precision != 0 && args->precision != -1 && ft_tolower(args->call) != 'x')
 	{
 		newstr = ft_strnew(args->precision);
 		ft_strncpy(newstr, str, args->precision);
-		str = newstr; //free(str/newstr);
+		str = newstr;
 	}
 	str = handle_width(str, args);
 	if (args->has_zero && !args->has_minus) //0 flag is ignored with minus flag
 		replace_zeros(str, args->has_space);
-	while (*str)
-		add_char(*str++, args);
+	while (str[i])
+		add_char(str[i++], args);
 }

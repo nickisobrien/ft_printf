@@ -36,7 +36,10 @@ void	handle_octal(uintmax_t num, t_arg *args)
 			str = ft_strjoin(spaces, str);
 	}
 	if (str[0])
+	{
 		handle_string(str, args);
+		free(str);
+	}
 	else
 	{
 		if (args->precision != -1)
