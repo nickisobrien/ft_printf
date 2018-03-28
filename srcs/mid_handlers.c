@@ -37,7 +37,8 @@ void	unum_handler(va_list ap, t_arg *args)
 {
 	uintmax_t unum;
 
-	if (ft_tolower(args->call) == 'u' || ft_tolower(args->call) == 'o' || ft_tolower(args->call) == 'x')
+	if (ft_tolower(args->call) == 'u' || ft_tolower(args->call) == 'o'
+		|| ft_tolower(args->call) == 'x')
 	{
 		args->has_plus = 0;
 		args->has_space = 0;
@@ -85,14 +86,13 @@ void	str_handler(va_list ap, t_arg *args)
 		handle_wstring(va_arg(ap, wchar_t *), args);
 	else if (args->call == 's')
 		handle_string(va_arg(ap, char *), args);
-
 }
 
 void	ptr_handler(va_list ap, t_arg *args)
 {
-	void *ptr;
-	char *str;
-	int i;
+	void	*ptr;
+	char	*str;
+	int		i;
 
 	i = 0;
 	ptr = va_arg(ap, void *);
@@ -106,15 +106,9 @@ void	ptr_handler(va_list ap, t_arg *args)
 	{
 		add_char('0', args);
 		add_char('x', args);
-		str = utoa_base((uintmax_t)ptr, 16);
+		str = ft_utoa_base((uintmax_t)ptr, 16);
 		while (str[i])
 			add_char(str[i++], args);
 		ft_strdel(&str);
 	}
 }
-
-
-
-
-
-

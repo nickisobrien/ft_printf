@@ -28,7 +28,6 @@ char	*handle_width(char *str, t_arg *args)
 			str = ft_strjoin(str, spaces);
 		else
 			str = ft_strjoin(spaces, str);
-		free(str);//why am i freeing str...
 	}
 	return (str);
 }
@@ -41,14 +40,15 @@ void	handle_string(char *str, t_arg *args)
 	i = 0;
 	if (!str)
 		str = "(null)";
-	if ((int)ft_strlen(str) > args->precision && args->precision != 0 && args->precision != -1 && ft_tolower(args->call) != 'x')
+	if ((int)ft_strlen(str) > args->precision && args->precision != 0
+		&& args->precision != -1 && ft_tolower(args->call) != 'x')
 	{
 		newstr = ft_strnew(args->precision);
 		ft_strncpy(newstr, str, args->precision);
 		str = newstr;
 	}
 	str = handle_width(str, args);
-	if (args->has_zero && !args->has_minus) //0 flag is ignored with minus flag
+	if (args->has_zero && !args->has_minus)
 		replace_zeros(str, args->has_space);
 	while (str[i])
 		add_char(str[i++], args);

@@ -17,7 +17,8 @@ int		parse_args(char *str, t_arg *args)
 	int i;
 
 	i = 0;
-	while (str[i] == '+' || str[i] == '-' || str[i] == ' ' || str[i] == '0' || str[i] == '#')
+	while (str[i] == '+' || str[i] == '-' || str[i] == ' '
+		|| str[i] == '0' || str[i] == '#')
 	{
 		if (str[i] == '+')
 			args->has_plus = 1;
@@ -46,7 +47,8 @@ int		parse_flags(char *str, t_arg *args)
 	int i;
 
 	i = 0;
-	while (str[i] == 'h' || str[i] == 'l' || str[i] == 'j' || str[i] == 'z' || str[i] == 't')
+	while (str[i] == 'h' || str[i] == 'l' || str[i] == 'j'
+		|| str[i] == 'z' || str[i] == 't')
 	{
 		if (str[i] == 'h' && str[i + 1] == 'h')
 		{

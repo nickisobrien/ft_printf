@@ -12,9 +12,6 @@
 
 #include "../includes/ft_printf.h"
 
-#include <limits.h>
-#include <locale.h>
-
 void	add_char(char c, t_arg *args)
 {
 	if (args->index + sizeof(c) == BUFF_SIZE)
@@ -30,11 +27,11 @@ void	flush(t_arg *args)
 	args->index = 0;
 }
 
-int 	ft_printf(char *str, ...)
+int		ft_printf(char *str, ...)
 {
-	va_list ap;
+	va_list	ap;
 	t_arg	args;
-	int 	index;
+	int		index;
 
 	va_start(ap, str);
 	init_arg_world(&args);
@@ -48,7 +45,7 @@ int 	ft_printf(char *str, ...)
 		init_arg(&args);
 		args.min_width = labs(atoi_edit(++str));
 		if (!*str)
-			break;
+			break ;
 		str += parse_args(str, &args);
 		str += parse_flags(str, &args);
 		if ((index = int_strchr(args.types, *str)) != -1)

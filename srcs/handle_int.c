@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-void	handle_int(intmax_t num, t_arg *args, int ct)
+void		handle_int(intmax_t num, t_arg *args, int ct)
 {
 	char *numstr;
 
@@ -23,7 +23,7 @@ void	handle_int(intmax_t num, t_arg *args, int ct)
 	handle_int_string(num, args, ct, numstr);
 }
 
-void	handle_int_string(intmax_t num, t_arg *args, int ct, char *numstr)
+void		handle_int_string(intmax_t num, t_arg *args, int ct, char *numstr)
 {
 	char *precision;
 	char *spaces;

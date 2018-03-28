@@ -25,11 +25,11 @@ void	handle_hex(uintmax_t n, t_arg *args)
 		str[0] = '0';
 	}
 	else
-		str = utoa_base(n, 16);
+		str = ft_utoa_base(n, 16);
 	if (args->has_pound && str[0] != '0')
 	{
 		ptr = str;
-		str = ft_strjoin("0x", str); //need to free str?
+		str = ft_strjoin("0x", str);
 		free(ptr);
 	}
 	if (ft_upper(args->call))

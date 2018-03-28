@@ -96,5 +96,7 @@ size_t				ft_getfirst(char const *s);
 size_t				ft_getlast(char const *s);
 void				ft_strupper(char *str);
 int					ft_upper(char c);
+char				*ft_utoa_base(uintmax_t n, int base);
+int					ft_countdigits(char *str);
 
 #endif

@@ -25,7 +25,7 @@ int		wchar_bytes(wchar_t w)
 	return (0);
 }
 
-void		handle_wchar(wchar_t w, t_arg *args)
+void	handle_wchar(wchar_t w, t_arg *args)
 {
 	if (w <= 0x7F)
 		add_char(w, args);

@@ -14,16 +14,16 @@
 
 void	handle_octal(uintmax_t num, t_arg *args)
 {
-	char *str;
-	char *spaces;
-	int i;
+	char	*str;
+	char	*spaces;
+	int		i;
 
-	str = utoa_base(num, 8);
+	str = ft_utoa_base(num, 8);
 	if (ft_countdigits(str) < args->precision)
 	{
 		spaces = ft_strnew(args->precision - ft_countdigits(str));
 		ft_memset(spaces, '0', args->precision - ft_countdigits(str));
-		str = ft_strjoin(spaces, str);//need to free numstr/precision? 
+		str = ft_strjoin(spaces, str);
 	}
 	str = add_prefix(str, args, 1, 0);
 	if ((int)ft_strlen(str) < args->min_width)
