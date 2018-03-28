@@ -34,9 +34,8 @@ int		parse_args(char *str, t_arg *args)
 	}
 	while (ft_isdigit(str[i]))
 		i++;
-	if (str[i] == '.')
-		if (!(args->precision = labs(atoi_edit(&(str[i + 1])))))
-			args->precision = -1;
+	if (str[i] == '.' && !(args->precision = atoi_edit(&(str[i + 1]))))
+		args->precision = -1;
 	while (str[i] == '.' || ft_isdigit(str[i]))
 		i++;
 	return (i);
@@ -51,15 +50,9 @@ int		parse_flags(char *str, t_arg *args)
 		|| str[i] == 'z' || str[i] == 't')
 	{
 		if (str[i] == 'h' && str[i + 1] == 'h')
-		{
-			args->hh = 1;
-			i++;
-		}
+			args->hh = 1 + (i++ * 0);
 		else if (str[i] == 'l' && str[i + 1] == 'l')
-		{
-			args->ll = 1;
-			i++;
-		}
+			args->ll = 1 + (i++ * 0);
 		else if (str[i] == 'h')
 			args->h = 1;
 		else if (str[i] == 'l')

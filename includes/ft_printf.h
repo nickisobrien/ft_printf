@@ -54,8 +54,8 @@ void			handle_octal(uintmax_t octal, t_arg *args);
 void			handle_hex(uintmax_t n, t_arg *args);
 void			handle_unsigned_int(intmax_t num, t_arg *args, int ct);
 void			handle_wchar(int c, t_arg *args);
-void			add_wchar(wchar_t c, t_arg *args);
 void			handle_wstring(wchar_t *str, t_arg *args);
+void			handle_ptr(va_list ap, t_arg *args);
 
 void			init_arg(t_arg *arg);
 void			init_arg_world(t_arg *arg);
@@ -63,7 +63,6 @@ void			init_arg_world(t_arg *arg);
 void			num_handler(va_list ap, t_arg *args);
 void			unum_handler(va_list ap, t_arg *args);
 void			str_handler(va_list ap, t_arg *args);
-void			ptr_handler(va_list ap, t_arg *args);
 void			char_handler(va_list ap, t_arg *args);
 
 int				ft_printf(char *str, ...);
@@ -73,6 +72,7 @@ void			add_char(char c, t_arg *args);
 int				parse_args(char *str, t_arg *args);
 int				parse_flags(char *str, t_arg *args);
 
+char			*handle_width(char *str, t_arg *args);
 intmax_t		atoi_edit(const char *str);
 int				strchr_edit(const char *str, int c);
 char			*ft_itoa_edit(intmax_t n);

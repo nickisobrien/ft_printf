@@ -98,5 +98,6 @@ void				ft_strupper(char *str);
 int					ft_upper(char c);
 char				*ft_utoa_base(uintmax_t n, int base);
 int					ft_countdigits(char *str);
+long long			ft_abs(long long num);
 
 #endif

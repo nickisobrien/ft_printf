@@ -26,7 +26,6 @@ void		handle_int(intmax_t num, t_arg *args, int ct)
 void		handle_int_string(intmax_t num, t_arg *args, int ct, char *numstr)
 {
 	char *precision;
-	char *spaces;
 	char *ptr;
 
 	if (ft_countdigits(numstr) < args->precision)
@@ -39,18 +38,7 @@ void		handle_int_string(intmax_t num, t_arg *args, int ct, char *numstr)
 		ft_strdel(&precision);
 	}
 	numstr = add_prefix(numstr, args, num, ct);
-	if ((int)ft_strlen(numstr) < args->min_width)
-	{
-		ptr = numstr;
-		spaces = ft_strnew(args->min_width - ft_strlen(numstr));
-		ft_memset(spaces, ' ', args->min_width - ft_strlen(numstr));
-		if (args->has_minus)
-			numstr = ft_strjoin(numstr, spaces);
-		else
-			numstr = ft_strjoin(spaces, numstr);
-		ft_strdel(&spaces);
-		ft_strdel(&ptr);
-	}
+	numstr = handle_width(numstr, args);
 	if (args->has_zero && !args->has_minus && !args->precision)
 		replace_zeros(numstr, args->has_space);
 	else

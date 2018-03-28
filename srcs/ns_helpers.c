@@ -14,31 +14,23 @@
 
 intmax_t	atoi_edit(const char *str)
 {
-	int			i;
 	intmax_t	atoi;
-	int			neg;
 
-	i = 0;
-	neg = 0;
 	atoi = 0;
-	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' ||
-			str[i] == '\r' || str[i] == '\f' || str[i] == '\v')
-		i++;
-	while (str[i] == '-' || str[i] == '+' || str[i] == ' '
-		|| str[i] == '0' || str[i] == '#')
+	while (*str == ' ' || *str == '\n' || *str == '\t' ||
+			*str == '\r' || *str == '\f' || *str == '\v')
+		str++;
+	while (*str == '-' || *str == '+' || *str == ' '
+		|| *str == '0' || *str == '#')
 	{
-		if (str[i] == '-')
-			neg = 1;
-		i++;
+		str++;
 	}
-	while ((str[i] != '\0') && (str[i] >= '0') && (str[i] <= '9'))
+	while ((*str != '\0') && (*str >= '0') && (*str <= '9'))
 	{
 		atoi *= 10;
-		atoi += str[i] - '0';
-		i++;
+		atoi += *str - '0';
+		str++;
 	}
-	if (neg)
-		return (-atoi);
 	return (atoi);
 }
 
@@ -55,19 +47,18 @@ char		*ft_itoa_edit(intmax_t n)
 	intmax_t	tmp;
 	int			negative;
 
-	i = 2;
+	i = 1;
 	negative = 0;
 	tmp = n;
 	neg(&n, &negative);
 	while (tmp /= 10)
 		i++;
 	i += negative;
-	if (!(str = malloc(i)))
+	if (!(str = ft_strnew(i)))
 		return (NULL);
-	str[--i] = '\0';
 	while (i--)
 	{
-		str[i] = labs((n % 10)) + '0';
+		str[i] = (char)ft_abs((n % 10)) + '0';
 		n /= 10;
 	}
 	if (negative)

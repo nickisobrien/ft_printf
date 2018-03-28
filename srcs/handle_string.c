@@ -18,16 +18,18 @@ char	*handle_width(char *str, t_arg *args)
 	char	*spaces;
 	char	*ptr;
 
-	ptr = str;
 	dif = args->min_width - ft_strlen(str);
 	if (dif > 0)
 	{
+		ptr = str;
 		spaces = ft_strnew(dif);
 		ft_memset(spaces, ' ', dif);
 		if (args->has_minus)
 			str = ft_strjoin(str, spaces);
 		else
 			str = ft_strjoin(spaces, str);
+		ft_strdel(&spaces);
+		ft_strdel(&ptr);
 	}
 	return (str);
 }
@@ -40,6 +42,7 @@ void	handle_string(char *str, t_arg *args)
 	i = 0;
 	if (!str)
 		str = "(null)";
+	str = ft_strdup(str);
 	if ((int)ft_strlen(str) > args->precision && args->precision != 0
 		&& args->precision != -1 && ft_tolower(args->call) != 'x')
 	{
@@ -52,4 +55,5 @@ void	handle_string(char *str, t_arg *args)
 		replace_zeros(str, args->has_space);
 	while (str[i])
 		add_char(str[i++], args);
+	ft_strdel(&str);
 }

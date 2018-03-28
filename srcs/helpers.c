@@ -46,9 +46,8 @@ void	fix_signs(char *str)
 	int		j;
 	char	tmp;
 
-	i = 0;
-	while (str[i])
-	{
+	i = -1;
+	while (str[++i])
 		if (str[i] == '+' || str[i] == '-' || str[i] == 'x')
 		{
 			j = 0;
@@ -66,8 +65,6 @@ void	fix_signs(char *str)
 				j++;
 			}
 		}
-		i++;
-	}
 }
 
 char	*add_prefix(char *numstr, t_arg *args, int num, int ct)
