@@ -25,9 +25,12 @@ void	handle_ptr(va_list ap, t_arg *args)
 	else
 	{
 		str = ft_utoa_base((uintmax_t)ptr, 16);
+		ptr = str;
 		str = ft_strjoin("0x", str);
+		free(ptr);
 	}
 	str = handle_width(str, args);
 	while (str[i])
 		add_char(str[i++], args);
+	free(str);
 }
