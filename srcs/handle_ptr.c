@@ -21,18 +21,13 @@ void	handle_ptr(va_list ap, t_arg *args)
 	i = 0;
 	ptr = va_arg(ap, void *);
 	if (ptr == 0)
-	{
-		add_char('0', args);
-		add_char('x', args);
-		add_char('0', args);
-	}
+		str = ft_strdup("0x0");
 	else
 	{
-		add_char('0', args);
-		add_char('x', args);
 		str = ft_utoa_base((uintmax_t)ptr, 16);
-		while (str[i])
-			add_char(str[i++], args);
-		ft_strdel(&str);
+		str = ft_strjoin("0x", str);
 	}
+	str = handle_width(str, args);
+	while (str[i])
+		add_char(str[i++], args);
 }
