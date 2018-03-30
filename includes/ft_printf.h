@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 12:35:39 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/27 19:31:49 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/29 18:25:46 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void			handle_unsigned_int(intmax_t num, t_arg *args, int ct);
 void			handle_wchar(int c, t_arg *args);
 void			handle_wstring(wchar_t *str, t_arg *args);
 void			handle_ptr(va_list ap, t_arg *args);
+void			handle_invalid_converter(t_arg *args);
 
 void			init_arg(t_arg *arg);
 void			init_arg_world(t_arg *arg);
@@ -72,6 +73,7 @@ void			add_char(char c, t_arg *args);
 int				parse_args(char *str, t_arg *args);
 int				parse_flags(char *str, t_arg *args);
 
+char			*handle_precision(char *numstr, t_arg *args);
 char			*handle_width(char *str, t_arg *args);
 intmax_t		atoi_edit(const char *str);
 int				strchr_edit(const char *str, int c);
@@ -82,7 +84,6 @@ int				int_strchr(const char *str, int c);
 int				ft_countdigits(char *str);
 char			*add_prefix(char *numstr, t_arg *args, int num, int ct);
 void			fix_signs(char *str);
-
-int				wchar_bytes(wchar_t w);
+char			*hex_precision(char *numstr, t_arg *args);
 
 #endif

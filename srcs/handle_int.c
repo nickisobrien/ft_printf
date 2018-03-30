@@ -6,11 +6,28 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 12:12:13 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/26 17:17:59 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/29 18:31:31 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+char		*handle_precision(char *numstr, t_arg *args)
+{
+	char *precision;
+	char *ptr;
+
+	if (ft_countdigits(numstr) < args->precision)
+	{
+		precision = ft_strnew(args->precision - ft_countdigits(numstr));
+		ft_memset(precision, '0', args->precision - ft_countdigits(numstr));
+		ptr = numstr;
+		numstr = ft_strjoin(precision, numstr);
+		ft_strdel(&ptr);
+		ft_strdel(&precision);
+	}
+	return (numstr);
+}
 
 void		handle_int(intmax_t num, t_arg *args, int ct)
 {
@@ -25,18 +42,9 @@ void		handle_int(intmax_t num, t_arg *args, int ct)
 
 void		handle_int_string(intmax_t num, t_arg *args, int ct, char *numstr)
 {
-	char *precision;
 	char *ptr;
 
-	if (ft_countdigits(numstr) < args->precision)
-	{
-		precision = ft_strnew(args->precision - ft_countdigits(numstr));
-		ft_memset(precision, '0', args->precision - ft_countdigits(numstr));
-		ptr = numstr;
-		numstr = ft_strjoin(precision, numstr);
-		ft_strdel(&ptr);
-		ft_strdel(&precision);
-	}
+	numstr = handle_precision(numstr, args);
 	numstr = add_prefix(numstr, args, num, ct);
 	numstr = handle_width(numstr, args);
 	if (args->has_zero && !args->has_minus && !args->precision)

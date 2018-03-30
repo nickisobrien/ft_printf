@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_ptr.c                                       :+:      :+:    :+:   */
+/*   ft_wstrlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/04 22:08:22 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/29 18:25:59 by nobrien          ###   ########.fr       */
+/*   Created: 2018/03/29 18:19:06 by nobrien           #+#    #+#             */
+/*   Updated: 2018/03/29 18:29:39 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void		handle_ptr(va_list ap, t_arg *args)
+int		ft_wstrlen(wchar_t *str)
 {
-	void	*ptr;
-	char	*str;
-	int		i;
+	int i;
 
 	i = 0;
-	ptr = va_arg(ap, void *);
-	if (ptr == 0 && args->precision != -1)
-		str = ft_strdup("0");
-	else
-		str = ft_utoa_base((uintmax_t)ptr, 16);
-	str = hex_precision(str, args);
-	ptr = str;
-	str = ft_strjoin("0x", str);
-	free(ptr);
-	str = handle_width(str, args);
 	while (str[i])
-		add_char(str[i++], args);
-	free(str);
+		i++;
+	return (i);
 }

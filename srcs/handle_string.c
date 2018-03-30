@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 17:55:05 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/26 16:26:17 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/29 18:34:56 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,16 @@ void	handle_string(char *str, t_arg *args)
 	int		i;
 
 	i = 0;
-	if (!str)
+	if (!str && !args->min_width)
 		str = "(null)";
+	else if (!str)
+		str = "";
 	str = ft_strdup(str);
-	if ((int)ft_strlen(str) > args->precision && args->precision != 0
-		&& args->precision != -1 && ft_tolower(args->call) != 'x')
+	if ((int)ft_strlen(str) > args->precision &&
+		args->precision != 0 && args->call == 's')
 	{
+		if (args->precision == -1)
+			args->precision = 0;
 		newstr = ft_strnew(args->precision);
 		ft_strncpy(newstr, str, args->precision);
 		str = newstr;

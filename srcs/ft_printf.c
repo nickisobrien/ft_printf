@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 16:21:23 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/26 19:41:36 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/29 18:56:11 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,12 @@ void		flush(t_arg *args)
 static int	get_handler(va_list ap, char *str, t_arg *args)
 {
 	int index;
-	int i;
 
-	i = 0;
 	if (!*str)
 		return (0);
-	if ((index = int_strchr(args->types, str[i])) != -1)
+	if ((index = int_strchr(args->types, *str)) != -1)
 	{
-		args->call = str[i];
+		args->call = *str;
 		if (index <= 2)
 			num_handler(ap, args);
 		else if (index <= 8)
@@ -48,9 +46,13 @@ static int	get_handler(va_list ap, char *str, t_arg *args)
 			handle_ptr(ap, args);
 		else if (index >= 9 && index <= 10)
 			str_handler(ap, args);
-		i++;
 	}
-	return (i);
+	else
+	{
+		args->call = *str;
+		handle_invalid_converter(args);
+	}
+	return (1);
 }
 
 int			ft_printf(char *str, ...)

@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:52:02 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/24 15:53:37 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/29 18:25:01 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,8 @@ int					ft_upper(char c);
 char				*ft_utoa_base(uintmax_t n, int base);
 int					ft_countdigits(char *str);
 long long			ft_abs(long long num);
+int					ft_wcharbytes(wchar_t w);
+int					ft_wstrbytes(wchar_t *str);
+int					ft_wstrlen(wchar_t *str);
 
 #endif

@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_wchar.c                                     :+:      :+:    :+:   */
+/*   ft_wcharbytes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/25 16:48:05 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/29 18:25:56 by nobrien          ###   ########.fr       */
+/*   Created: 2018/03/29 18:14:12 by nobrien           #+#    #+#             */
+/*   Updated: 2018/03/29 18:27:29 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	handle_wchar(wchar_t w, t_arg *args)
+int		ft_wcharbytes(wchar_t w)
 {
 	if (w <= 0x7F)
-		add_char(w, args);
+		return (1);
 	else if (w <= 0x7FF)
-	{
-		add_char((w >> 6) + 0xC0, args);
-		add_char((w & 0x3F) + 0x80, args);
-	}
+		return (2);
 	else if (w <= 0xFFFF)
-	{
-		add_char((w >> 12) + 0xE0, args);
-		add_char(((w >> 6) & 0x3F) + 0x80, args);
-		add_char((w & 0x3F) + 0x80, args);
-	}
+		return (3);
 	else if (w <= 0x10FFFF)
-	{
-		add_char((w >> 18) + 0xF0, args);
-		add_char(((w >> 12) & 0x3F) + 0x80, args);
-		add_char(((w >> 6) & 0x3F) + 0x80, args);
-		add_char((w & 0x3F) + 0x80, args);
-	}
+		return (4);
+	return (0);
 }
