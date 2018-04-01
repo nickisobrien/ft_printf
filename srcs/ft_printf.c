@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 16:21:23 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/29 18:56:11 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/04/01 13:58:02 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int			ft_printf(char *str, ...)
 		args.min_width = atoi_edit(++str);
 		if (!*str)
 			break ;
-		str += parse_args(str, &args);
+		str += parse_args(str, &args, ap);
 		str += parse_flags(str, &args);
 		str += get_handler(ap, str, &args);
 	}

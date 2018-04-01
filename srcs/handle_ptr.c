@@ -6,13 +6,13 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 22:08:22 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/29 18:25:59 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/03/31 19:45:34 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void		handle_ptr(va_list ap, t_arg *args)
+void	handle_ptr(va_list ap, t_arg *args)
 {
 	void	*ptr;
 	char	*str;

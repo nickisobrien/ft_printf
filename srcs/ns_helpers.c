@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/04 22:08:22 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/26 19:43:51 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/04/01 12:45:21 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,10 @@ intmax_t	atoi_edit(const char *str)
 
 	atoi = 0;
 	while (*str == ' ' || *str == '\n' || *str == '\t' ||
-			*str == '\r' || *str == '\f' || *str == '\v')
+			*str == '\r' || *str == '\f' || *str == '\v' ||
+			*str == '-' || *str == '+' || *str == ' ' ||
+			*str == '0' || *str == '#' || *str == '*')
 		str++;
-	while (*str == '-' || *str == '+' || *str == ' '
-		|| *str == '0' || *str == '#')
-	{
-		str++;
-	}
 	while ((*str != '\0') && (*str >= '0') && (*str <= '9'))
 	{
 		atoi *= 10;
