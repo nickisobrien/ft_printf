@@ -6,45 +6,45 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:11:21 by nobrien           #+#    #+#             */
-/*   Updated: 2018/04/02 13:52:20 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/04/02 13:53:06 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static int		parse_wildcards_width(char *str, t_arg *args, va_list ap)
-{
-	int i;
-
-	i = 0;
-	while (ft_isdigit(str[i]))
-		i++;
-	if (str[i] == '*' && str[i + 1] && !ft_isdigit(str[i + 1]))
-	{
-		args->min_width = va_arg(ap, int);
-		if (args->min_width < 0)
-		{
-			args->has_minus = 1;
-			args->min_width = ft_abs(args->min_width);
-		}
-	}
-	else if (str[i] == '*')
-		va_arg(ap, int);
-	return (0);
-}
-
-// static int		parse_wildcards_precision(char *str, t_arg *args, va_list ap)
+// static int		parse_wildcards_width(char *str, t_arg *args, va_list ap)
 // {
-// 	if (*str == '*')
+// 	int i;
+
+// 	i = 0;
+// 	while (ft_isdigit(str[i]))
+// 		i++;
+// 	if (str[i] == '*' && str[i + 1] && !ft_isdigit(str[i + 1]))
 // 	{
-// 		args->precision = va_arg(ap, int);
-// 		if (args->precision == 0)
-// 			args->precision = -1;
-// 		else if (args->precision < 0)
-// 			args->precision = 0;
+// 		args->min_width = va_arg(ap, int);
+// 		if (args->min_width < 0)
+// 		{
+// 			args->has_minus = 1;
+// 			args->min_width = ft_abs(args->min_width);
+// 		}
 // 	}
+// 	else if (str[i] == '*')
+// 		va_arg(ap, int);
 // 	return (0);
 // }
+
+static int		parse_wildcards_precision(char *str, t_arg *args, va_list ap)
+{
+	if (*str == '*')
+	{
+		args->precision = va_arg(ap, int);
+		if (args->precision == 0)
+			args->precision = -1;
+		else if (args->precision < 0)
+			args->precision = 0;
+	}
+	return (0);
+}
 
 int				parse_args(char *str, t_arg *args, va_list ap)
 {
