@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:11:21 by nobrien           #+#    #+#             */
-/*   Updated: 2018/04/02 12:45:11 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/04/02 13:25:50 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int				parse_args(char *str, t_arg *args, va_list ap)
 	int i;
 
 	i = parse_wildcards_width(str, args, ap);
+	(void)ap;
 	while (str[i] && (str[i] == '+' || str[i] == '-' || str[i] == '*' ||
 		str[i] == ' ' || str[i] == '0' || str[i] == '#'))
 	{
