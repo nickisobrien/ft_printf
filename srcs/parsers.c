@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:11:21 by nobrien           #+#    #+#             */
-/*   Updated: 2018/04/02 14:13:56 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/04/02 14:21:08 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int				parse_args(char *str, t_arg *args, va_list ap)
 {
 	int i;
 
-	i = 0;
 	i = parse_wildcards_width(str, args, ap);
 	while (str[i] == '+' || str[i] == '-' || str[i] == '#' ||
 		str[i] == ' ' || str[i] == '0' || str[i] == '*')
@@ -81,10 +80,9 @@ int				parse_flags(char *str, t_arg *args)
 	int i;
 
 	i = 0;
-	while (str[i] && (str[i] == '.' || str[i] == '*' || ft_isdigit(str[i])))
-		i++;
 	while (str[i] == 'h' || str[i] == 'l' || str[i] == 'j'
-		|| str[i] == 'z' || str[i] == 't')
+		|| str[i] == 'z' || str[i] == 't' || str[i] == '.'
+		|| str[i] == '*' || ft_isdigit(str[i]))
 	{
 		if (str[i] == 'h' && str[i + 1] == 'h')
 			args->hh = 1 + (i++ * 0);
