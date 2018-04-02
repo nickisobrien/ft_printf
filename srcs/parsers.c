@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:11:21 by nobrien           #+#    #+#             */
-/*   Updated: 2018/04/02 13:47:41 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/04/02 13:51:21 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,26 @@ static int		parse_wildcards_width(char *str, t_arg *args, va_list ap)
 	return (0);
 }
 
-static int		parse_wildcards_precision(char *str, t_arg *args, va_list ap)
-{
-	if (*str == '*')
-	{
-		args->precision = va_arg(ap, int);
-		if (args->precision == 0)
-			args->precision = -1;
-		else if (args->precision < 0)
-			args->precision = 0;
-	}
-	return (0);
-}
+// static int		parse_wildcards_precision(char *str, t_arg *args, va_list ap)
+// {
+// 	if (*str == '*')
+// 	{
+// 		args->precision = va_arg(ap, int);
+// 		if (args->precision == 0)
+// 			args->precision = -1;
+// 		else if (args->precision < 0)
+// 			args->precision = 0;
+// 	}
+// 	return (0);
+// }
 
 int				parse_args(char *str, t_arg *args, va_list ap)
 {
 	int i;
 
 	i = parse_wildcards_width(str, args, ap);
-	while (str[i] && (str[i] == '+' || str[i] == '-' || str[i] == '*' ||
-		str[i] == ' ' || str[i] == '0' || str[i] == '#'))
+	while (str[i] == '+' || str[i] == '-' || str[i] == '*' ||
+		str[i] == ' ' || str[i] == '0' || str[i] == '#')
 	{
 		if (str[i] == '+')
 			args->has_plus = 1;
@@ -70,8 +70,8 @@ int				parse_args(char *str, t_arg *args, va_list ap)
 		i++;
 	if (str[i] == '.' && !(args->precision = atoi_edit(&(str[i + 1]))))
 		args->precision = -1;
-	if (str[i] == '.' && str[i + 1] == '*')
-		parse_wildcards_precision(&(str[i + 1]), args, ap);
+	// if (str[i] == '.' && str[i + 1] == '*')
+	// 	parse_wildcards_precision(&(str[i + 1]), args, ap);
 	return (i);
 }
 
@@ -80,7 +80,7 @@ int				parse_flags(char *str, t_arg *args)
 	int i;
 
 	i = 0;
-	while (str[i] == '.' || ft_isdigit(str[i]) || str[i] == '*')
+	while (str[i] == '.' || ft_isdigit(str[i]) || str[i] == '*')//possible error..?
 		i++;
 	while (str[i] == 'h' || str[i] == 'l' || str[i] == 'j'
 		|| str[i] == 'z' || str[i] == 't')
