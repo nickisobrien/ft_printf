@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 12:35:39 by nobrien           #+#    #+#             */
-/*   Updated: 2018/04/02 12:28:32 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/04/02 15:24:58 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int				ft_printf(char *str, ...);
 void			add_char(char c, t_arg *args);
 
 int				parse_args(char *str, t_arg *args, va_list ap);
-int				parse_flags(char *str, t_arg *args);
+int				parse_flags(char *str, t_arg *args, va_list ap);
 
 char			*handle_precision(char *numstr, t_arg *args);
 char			*handle_width(char *str, t_arg *args);

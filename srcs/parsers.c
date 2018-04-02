@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:11:21 by nobrien           #+#    #+#             */
-/*   Updated: 2018/04/02 14:28:08 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/04/02 15:39:27 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,12 @@ static int		parse_wildcards_width(char *str, t_arg *args, va_list ap)
 	int i;
 
 	i = 0;
-	while (ft_isdigit(str[i]))
-		i++;
 	if (str[i] == '*' && str[i + 1] && !ft_isdigit(str[i + 1]))
 	{
 		args->min_width = va_arg(ap, int);
 		if (args->min_width < 0)
-		{
 			args->has_minus = 1;
-			args->min_width = ft_abs(args->min_width);
-		}
+		args->min_width = ft_abs(args->min_width);
 	}
 	else if (str[i] == '*')
 		va_arg(ap, int);
@@ -50,7 +46,9 @@ int				parse_args(char *str, t_arg *args, va_list ap)
 {
 	int i;
 
-	i = parse_wildcards_width(str, args, ap);
+	i = 0;
+	while (ft_isdigit(str[i]) && str[i] != '0')
+		i++;
 	while (str[i] == '+' || str[i] == '-' || str[i] == '#' ||
 		str[i] == ' ' || str[i] == '0' || str[i] == '*')
 	{
@@ -60,28 +58,29 @@ int				parse_args(char *str, t_arg *args, va_list ap)
 			args->has_minus = 1;
 		else if (str[i] == ' ')
 			args->has_space = 1;
-		else if (str[i] == '0')
+		else if (str[i] == '0' && !ft_isdigit(str[i - 1]))
 			args->has_zero = 1;
 		else if (str[i] == '#')
 			args->has_pound = 1;
+		else if (str[i] == '*')
+			parse_wildcards_width(str + i, args, ap);
 		i++;
 	}
-	while (ft_isdigit(str[i]))
-		i++;
-	if (str[i] == '.' && !(args->precision = atoi_edit(&(str[i + 1]))))
-		args->precision = -1;
-	if (str[i] == '.' && str[i + 1] == '*')
-		parse_wildcards_precision(&(str[i + 1]), args, ap);
-	while (str[i] == '.' || ft_isdigit(str[i]))
-		i++;
 	return (i);
 }
 
-int				parse_flags(char *str, t_arg *args)
+int				parse_flags(char *str, t_arg *args, va_list ap)
 {
 	int i;
 
 	i = 0;
+	while (ft_isdigit(str[i]))
+		i++;
+	if (str[i] == '.' && !(args->precision = atoi_edit(&(str[i + 1]))))
+		args->precision = -1;
+	parse_wildcards_precision(&(str[i + 1]), args, ap);
+	while (str[i] == '.' || ft_isdigit(str[i]))
+		i++;
 	while (str[i] == 'h' || str[i] == 'l' || str[i] == 'j'
 		|| str[i] == 'z' || str[i] == 't' || str[i] == '*')
 	{

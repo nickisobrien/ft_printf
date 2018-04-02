@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 17:55:05 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/29 19:04:14 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/04/02 15:12:30 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	handle_string(char *str, t_arg *args)
 	int		i;
 
 	i = 0;
-	if (!str && !args->min_width)
+	if (!str)
 		str = "(null)";
 	else if (!str)
 		str = "";

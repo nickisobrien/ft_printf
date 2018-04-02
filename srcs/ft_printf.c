@@ -6,11 +6,17 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 16:21:23 by nobrien           #+#    #+#             */
-/*   Updated: 2018/04/02 13:31:11 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/04/02 15:40:44 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+int main(void)
+{
+	printf("t{%05p}\n", 0);
+	ft_printf("m{%05p}\n", 0);
+}
 
 static void	flush(t_arg *args)
 {
@@ -74,7 +80,7 @@ int			ft_printf(char *str, ...)
 		if (!*str)
 			break ;
 		str += parse_args(str, &args, ap);
-		str += parse_flags(str, &args);
+		str += parse_flags(str, &args, ap);
 		str += get_handler(ap, str, &args);
 	}
 	flush(&args);
