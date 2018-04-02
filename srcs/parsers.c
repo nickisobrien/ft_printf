@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:11:21 by nobrien           #+#    #+#             */
-/*   Updated: 2018/04/02 14:10:01 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/04/02 14:13:56 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int				parse_flags(char *str, t_arg *args)
 	int i;
 
 	i = 0;
-	while (str[i] == '.' || str[i] == '*' || (str[i] >= '0' && str[i] <= '9')) //ft_isdigit(str[i]))//possible error..?
+	while (str[i] && (str[i] == '.' || str[i] == '*' || ft_isdigit(str[i])))
 		i++;
 	while (str[i] == 'h' || str[i] == 'l' || str[i] == 'j'
 		|| str[i] == 'z' || str[i] == 't')
