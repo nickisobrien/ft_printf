@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:11:21 by nobrien           #+#    #+#             */
-/*   Updated: 2018/04/02 12:37:10 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/04/02 12:45:11 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,12 @@ static int		parse_wildcards_width(char *str, t_arg *args, va_list ap)
 			args->has_minus = 1;
 			args->min_width = ft_abs(args->min_width);
 		}
-		return (1 + i);
 	}
 	else if (str[i] == '*')
 	{
 		va_arg(ap, int);
-		return (1 + i);
 	}
-	return (i);
+	return (0);
 }
 
 static int		parse_wildcards_precision(char *str, t_arg *args, va_list ap)
@@ -49,7 +47,6 @@ static int		parse_wildcards_precision(char *str, t_arg *args, va_list ap)
 			args->precision = -1;
 		else if (args->precision < 0)
 			args->precision = 0;
-		return (1 + i);
 	}
 	return (0);
 }
@@ -59,7 +56,7 @@ int				parse_args(char *str, t_arg *args, va_list ap)
 	int i;
 
 	i = parse_wildcards_width(str, args, ap);
-	while (str[i] && (str[i] == '+' || str[i] == '-' ||
+	while (str[i] && (str[i] == '+' || str[i] == '-' || str[i] == '*' ||
 		str[i] == ' ' || str[i] == '0' || str[i] == '#'))
 	{
 		if (str[i] == '+')
@@ -78,7 +75,7 @@ int				parse_args(char *str, t_arg *args, va_list ap)
 		i++;
 	if (str[i] == '.' && !(args->precision = atoi_edit(&(str[i + 1]))))
 		args->precision = -1;
-	i += parse_wildcards_precision(&(str[i + 1]), args, ap);
+	parse_wildcards_precision(&(str[i + 1]), args, ap);
 	return (i);
 }
 
