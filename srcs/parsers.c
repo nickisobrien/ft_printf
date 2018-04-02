@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:11:21 by nobrien           #+#    #+#             */
-/*   Updated: 2018/04/02 14:26:26 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/04/02 14:28:08 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int				parse_args(char *str, t_arg *args, va_list ap)
 		args->precision = -1;
 	if (str[i] == '.' && str[i + 1] == '*')
 		parse_wildcards_precision(&(str[i + 1]), args, ap);
-	while (ft_isdigit(str[i]))
+	while (str[i] == '.' || ft_isdigit(str[i]))
 		i++;
 	return (i);
 }
@@ -83,8 +83,7 @@ int				parse_flags(char *str, t_arg *args)
 
 	i = 0;
 	while (str[i] == 'h' || str[i] == 'l' || str[i] == 'j'
-		|| str[i] == 'z' || str[i] == 't' || str[i] == '.'
-		|| str[i] == '*')
+		|| str[i] == 'z' || str[i] == 't' || str[i] == '*')
 	{
 		if (str[i] == 'h' && str[i + 1] == 'h')
 			args->hh = 1 + (i++ * 0);
