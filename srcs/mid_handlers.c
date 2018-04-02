@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:14:30 by nobrien           #+#    #+#             */
-/*   Updated: 2018/03/29 20:06:54 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/04/02 11:45:33 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void		num_handler(va_list ap, t_arg *args)
 		else
 			handle_int(va_arg(ap, int), args, 0);
 	}
+	else if (ft_tolower(args->call) == 'f')
+		handle_float(va_arg(ap, double), args);
 }
 
 uintmax_t	get_unum(va_list ap, t_arg *args)

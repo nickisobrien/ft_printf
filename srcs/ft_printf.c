@@ -6,21 +6,13 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 16:21:23 by nobrien           #+#    #+#             */
-/*   Updated: 2018/04/01 13:58:02 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/04/02 12:26:27 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void		add_char(char c, t_arg *args)
-{
-	if (args->index + sizeof(c) == BUFF_SIZE)
-		flush(args);
-	args->buf[args->index] = c;
-	args->index += sizeof(c);
-}
-
-void		flush(t_arg *args)
+static void	flush(t_arg *args)
 {
 	write(1, args->buf, args->index);
 	args->printed_chars += args->index;
@@ -36,15 +28,15 @@ static int	get_handler(va_list ap, char *str, t_arg *args)
 	if ((index = int_strchr(args->types, *str)) != -1)
 	{
 		args->call = *str;
-		if (index <= 2)
+		if (index <= 4)
 			num_handler(ap, args);
-		else if (index <= 8)
+		else if (index <= 10)
 			unum_handler(ap, args);
-		else if (index >= 12)
+		else if (index >= 14)
 			char_handler(ap, args);
 		else if (args->call == 'p')
 			handle_ptr(ap, args);
-		else if (index >= 9 && index <= 10)
+		else if (index >= 11 && index <= 12)
 			str_handler(ap, args);
 	}
 	else
@@ -53,6 +45,14 @@ static int	get_handler(va_list ap, char *str, t_arg *args)
 		handle_invalid_converter(args);
 	}
 	return (1);
+}
+
+void		add_char(char c, t_arg *args)
+{
+	if (args->index + sizeof(c) == BUFF_SIZE)
+		flush(args);
+	args->buf[args->index] = c;
+	args->index += sizeof(c);
 }
 
 int			ft_printf(char *str, ...)

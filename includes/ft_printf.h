@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 12:35:39 by nobrien           #+#    #+#             */
-/*   Updated: 2018/04/01 12:33:33 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/04/02 12:28:32 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void			handle_unsigned_int(intmax_t num, t_arg *args, int ct);
 void			handle_wchar(int c, t_arg *args);
 void			handle_wstring(wchar_t *str, t_arg *args);
 void			handle_ptr(va_list ap, t_arg *args);
+void			handle_float(double num, t_arg *args);
 void			handle_invalid_converter(t_arg *args);
 
 void			init_arg(t_arg *arg);
@@ -67,7 +68,6 @@ void			str_handler(va_list ap, t_arg *args);
 void			char_handler(va_list ap, t_arg *args);
 
 int				ft_printf(char *str, ...);
-void			flush(t_arg *args);
 void			add_char(char c, t_arg *args);
 
 int				parse_args(char *str, t_arg *args, va_list ap);

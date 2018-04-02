@@ -12,7 +12,7 @@ DIR_O = temporary
 
 HEADER = include
 
-SOURCES = handle_invalid_converter.c handle_ptr.c handle_char.c handle_hex.c handle_int.c handle_octal.c handle_string.c handle_wchar.c handle_wstring.c ft_printf.c init.c mid_handlers.c parsers.c helpers.c ns_helpers.c
+SOURCES = handle_float.c handle_invalid_converter.c handle_ptr.c handle_char.c handle_hex.c handle_int.c handle_octal.c handle_string.c handle_wchar.c handle_wstring.c ft_printf.c init.c mid_handlers.c parsers.c helpers.c ns_helpers.c
 
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 

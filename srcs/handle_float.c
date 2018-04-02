@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   handle_float.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/22 15:10:42 by nobrien           #+#    #+#             */
-/*   Updated: 2018/04/02 11:44:27 by nobrien          ###   ########.fr       */
+/*   Created: 2018/04/02 11:37:02 by nobrien           #+#    #+#             */
+/*   Updated: 2018/04/02 12:27:20 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	init_arg(t_arg *arg)
+void		handle_float(double num, t_arg *args)
 {
-	arg->has_zero = 0;
-	arg->has_minus = 0;
-	arg->has_space = 0;
-	arg->min_width = 0;
-	arg->has_plus = 0;
-	arg->has_pound = 0;
-	arg->precision = 0;
-	arg->hh = 0;
-	arg->ll = 0;
-	arg->h = 0;
-	arg->l = 0;
-	arg->j = 0;
-	arg->z = 0;
-	arg->t = 0;
-	arg->call = 0;
-}
+	int i;
+	int prec;
 
-void	init_arg_world(t_arg *args)
-{
-	args->types = "dDifFoOuUxXsSpCc%%";
-	args->printed_chars = 0;
-	args->index = 0;
+	if (num < 0)
+	{
+		add_char('-', args);
+		num = -num;
+	}
+	handle_int((intmax_t)num, args, 0);
+	num -= (intmax_t)num - 1;
+	add_char('.', args);
+	i = 0;
+	prec = (args->precision && args->precision != -1) ? args->precision : 6;
+	while (i < prec)
+	{
+		num *= 10;
+		add_char(((intmax_t)num % 10) + '0', args);
+		i++;
+	}
 }
