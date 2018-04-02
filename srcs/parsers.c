@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:11:21 by nobrien           #+#    #+#             */
-/*   Updated: 2018/04/01 14:06:20 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/04/02 12:37:10 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		parse_wildcards_width(char *str, t_arg *args, va_list ap)
 	i = 0;
 	while (ft_isdigit(str[i]))
 		i++;
-	if (str[i] == '*' && !ft_isdigit(str[i + 1]))
+	if (str[i] == '*' && str[i + 1] && !ft_isdigit(str[i + 1]))
 	{
 		args->min_width = va_arg(ap, int);
 		if (args->min_width < 0)
@@ -34,7 +34,7 @@ static int		parse_wildcards_width(char *str, t_arg *args, va_list ap)
 		va_arg(ap, int);
 		return (1 + i);
 	}
-	return (0);
+	return (i);
 }
 
 static int		parse_wildcards_precision(char *str, t_arg *args, va_list ap)
@@ -59,8 +59,8 @@ int				parse_args(char *str, t_arg *args, va_list ap)
 	int i;
 
 	i = parse_wildcards_width(str, args, ap);
-	while (str[i] == '+' || str[i] == '-' || str[i] == ' '
-		|| str[i] == '0' || str[i] == '#')
+	while (str[i] && (str[i] == '+' || str[i] == '-' ||
+		str[i] == ' ' || str[i] == '0' || str[i] == '#'))
 	{
 		if (str[i] == '+')
 			args->has_plus = 1;
@@ -74,7 +74,7 @@ int				parse_args(char *str, t_arg *args, va_list ap)
 			args->has_pound = 1;
 		i++;
 	}
-	while (ft_isdigit(str[i]))
+	while (str[i] && ft_isdigit(str[i]))
 		i++;
 	if (str[i] == '.' && !(args->precision = atoi_edit(&(str[i + 1]))))
 		args->precision = -1;
