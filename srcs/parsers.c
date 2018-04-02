@@ -6,7 +6,7 @@
 /*   By: nobrien <nobrien@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:11:21 by nobrien           #+#    #+#             */
-/*   Updated: 2018/04/02 13:42:40 by nobrien          ###   ########.fr       */
+/*   Updated: 2018/04/02 13:47:41 by nobrien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int				parse_args(char *str, t_arg *args, va_list ap)
 		i++;
 	if (str[i] == '.' && !(args->precision = atoi_edit(&(str[i + 1]))))
 		args->precision = -1;
-	if (str[i] == '.' && str[i + 1])
+	if (str[i] == '.' && str[i + 1] == '*')
 		parse_wildcards_precision(&(str[i + 1]), args, ap);
 	return (i);
 }
